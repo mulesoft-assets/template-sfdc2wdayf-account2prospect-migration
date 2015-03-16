@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:wd-financial="http://www.mulesoft.org/schema/mule/wd-financial" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" version="EE-3.6.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/wd-financial http://www.mulesoft.org/schema/mule/wd-financial/current/mule-wd-financial.xsd">
+
+	<!-- This is the main configuration files, you should place here all the 
+		Connectors configuration an declarations -->
+
+	<context:property-placeholder
+		location="common.properties, mule.${mule.env}.properties" />
+
+	<smtp:gmail-connector name="gmailConnector"
+		doc:name="Gmail" validateConnections="true"
+		doc:description="This is the connector used to send email notifications. You should change its configuration to select a different email provider"
+		contentType="text/html" />
+
+	<sfdc:config name="SalesforceA" username="${sfdc.a.username}"
+		password="${sfdc.a.password}" securityToken="${sfdc.a.securityToken}"
+		url="${sfdc.a.url}" doc:name="Salesforce A"
+		doc:description="One of your SalesForce instance. This is the source organization, where accounts will be migrated from.">
+		<sfdc:connection-pooling-profile
+			initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" />
+	</sfdc:config>
+	
+    <wd-financial:config name="Workday_Financial_Management" doc:name="Workday Financial Management" financialEndpoint="${wday.endpoint}" financialPassword="${wday.password}" financialUser="${wday.user}">
+        <wd-financial:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </wd-financial:config>
+
+</mule>
