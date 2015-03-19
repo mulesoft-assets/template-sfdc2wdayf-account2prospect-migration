@@ -7,8 +7,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<http:listener-config name="HTTP_Listener_Configuration"
-		host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
+
 
 	<flow name="triggerFlow" processingStrategy="synchronous"
 		doc:description="This is the simpliest entry point to start the excecution of your Template
@@ -18,8 +17,8 @@ Here you should:
 Here you should not: 
 	* Run validations against external systems
 	* Choose flow of your application based on input parameters">
-		<http:listener config-ref="HTTP_Listener_Configuration"
-			path="/migratecontacts" doc:name="Start Synchronization">
+		<http:listener config-ref="HTTP_connector" path="/migrateAccounts"
+			doc:name="Start Synchronization">
 			<http:response-builder statusCode="200">
 				<http:header headerName="content-type" value="text/html" />
 			</http:response-builder>

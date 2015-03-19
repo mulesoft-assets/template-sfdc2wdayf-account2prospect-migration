@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Admin" created="Wed Mar 11 08:29:59 CET 2015" description="Map To PutProspectRequestType" guiVersion="3.4.4.P" id="1426075812236" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Mar 11 08:29:59 CET 2015" modifiedBy="Admin" name="Map_To_PutProspectRequestType" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="6" __sourcePath="{}/Account" _dataStructure="OBJECT" _id="__id" _type="Input" id="214b9298-678c-465a-91ed-4de108a249db">
+<Record fieldDelimiter="," name="Account" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="9" __sourcePath="{}/Account/BillingAddress/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="8" __sourcePath="{}/Account/BillingAddress/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="6" __sourcePath="{}/Account/BillingAddress/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="string"/>
+<Field __index="3" __sourcePath="{}/Account/BillingAddress/postalCode" containerType="SINGLE" label="postalCode" name="postalCode" type="string"/>
+<Field __index="5" __sourcePath="{}/Account/BillingAddress/state" containerType="SINGLE" label="state" name="state" type="string"/>
+<Field __index="7" __sourcePath="{}/Account/BillingAddress/stateCode" containerType="SINGLE" label="stateCode" name="stateCode" type="string"/>
+<Field __index="4" __sourcePath="{}/Account/BillingAddress/street" containerType="SINGLE" label="street" name="street" type="string"/>
+<Field __index="2" __sourcePath="{}/Account/Description" containerType="SINGLE" label="Description" name="Description" type="string"/>
+<Field __index="0" __sourcePath="{}/Account/Id" containerType="SINGLE" label="Id" name="Id" type="string"/>
+<Field __index="10" __sourcePath="{}/Account/Industry" containerType="SINGLE" label="Industry" name="Industry" type="string"/>
+<Field __index="11" __sourcePath="{}/Account/LastModifiedDate" containerType="SINGLE" label="LastModifiedDate" name="LastModifiedDate" type="string"/>
+<Field __index="1" __sourcePath="{}/Account/Name" containerType="SINGLE" label="Name" name="Name" type="string"/>
+<Field __index="12" __sourcePath="{}/Account/Type" containerType="SINGLE" label="Type" name="Type" type="string"/>
+<Field __sourcePath="{}/Account/Website" containerType="SINGLE" label="Website" name="Website" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f">
+<Record fieldDelimiter="," name="addressData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/prospectData/contactData/addressData/addressFormatType" containerType="SINGLE" label="addressFormatType" name="addressFormatType" type="string"/>
+<Field __index="1" __sourcePath="{}/object/prospectData/contactData/addressData/addressID" containerType="SINGLE" label="addressID" name="addressID" type="string"/>
+<Field __index="7" __sourcePath="{}/object/prospectData/contactData/addressData/addressReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+<Field __index="10" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor_1" type="string"/>
+<Field __index="13" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor_2" type="string"/>
+<Field __index="14" __sourcePath="{}/object/prospectData/contactData/addressData/defaultedBusinessSiteAddress" containerType="SINGLE" label="defaultedBusinessSiteAddress" name="defaultedBusinessSiteAddress" type="boolean"/>
+<Field __index="15" __sourcePath="{}/object/prospectData/contactData/addressData/delete" containerType="SINGLE" label="delete" name="delete" type="boolean"/>
+<Field __index="16" __sourcePath="{}/object/prospectData/contactData/addressData/doNotReplaceAll" containerType="SINGLE" label="doNotReplaceAll" name="doNotReplaceAll" type="boolean"/>
+<Field __dmType="Calendar" __index="17" __sourcePath="{}/object/prospectData/contactData/addressData/effectiveDate" containerType="SINGLE" label="effectiveDate" name="effectiveDate" type="string"/>
+<Field __index="18" __sourcePath="{}/object/prospectData/contactData/addressData/formattedAddress" containerType="SINGLE" label="formattedAddress" name="formattedAddress" type="string"/>
+<Field __dmType="Calendar" __index="19" __sourcePath="{}/object/prospectData/contactData/addressData/lastModified" containerType="SINGLE" label="lastModified" name="lastModified" type="string"/>
+<Field __index="20" __sourcePath="{}/object/prospectData/contactData/addressData/municipality" containerType="SINGLE" label="municipality" name="municipality" type="string"/>
+<Field __index="21" __sourcePath="{}/object/prospectData/contactData/addressData/municipalityLocal" containerType="SINGLE" label="municipalityLocal" name="municipalityLocal" type="string"/>
+<Field __index="22" __sourcePath="{}/object/prospectData/contactData/addressData/postalCode" containerType="SINGLE" label="postalCode" name="postalCode" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="2" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="9d9f867b-a9a9-4908-a9b9-d5e27ac91563">
+<Record fieldDelimiter="," name="addressLineData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="2" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+<Field __index="3" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="4" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="41" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="82e28997-8f59-4b28-a051-08196ac602b6">
+<Record fieldDelimiter="," name="emailAddressData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="41" __sourcePath="{}/object/prospectData/contactData/emailAddressData/emailAddress" containerType="SINGLE" label="emailAddress" name="emailAddress" type="string"/>
+<Field __index="42" __sourcePath="{}/object/prospectData/contactData/emailAddressData/emailComment" containerType="SINGLE" label="emailComment" name="emailComment" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="5" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/addressReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="1245ffdf-1104-433c-ace5-3abbb74ffd87">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="5" __sourcePath="{}/object/prospectData/contactData/addressData/addressReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="6" __sourcePath="{}/object/prospectData/contactData/addressData/addressReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="8" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="fb16407c-e2f5-4f07-a850-ce6d8be1416c">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="8" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="9" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="11" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="faa6a3bf-2e3c-45cb-88db-9226a6c2c18d">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="11" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="12" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="32" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d429e417-e6fb-4519-8ed6-942fabde2986" _parent_id="__parent_id" _type="Output" id="bf264a10-8f8f-487d-958f-67713bbcef3f">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="32" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/typeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="33" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/typeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="35" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0483c77e-1a39-474f-abea-f023c2a92ff6" _parent_id="__parent_id" _type="Output" id="186732bf-2085-43e0-b2d2-975bbeb73e27">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="35" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="36" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="38" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForTenantedReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="13d18564-79f2-4c97-bf8a-65b8f5950920" _parent_id="__parent_id" _type="Output" id="9301016c-d2b7-4cea-9d34-cd486647ed3b">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="38" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForTenantedReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="39" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForTenantedReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="46" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0d47ca2e-2147-4c8c-9137-a7677f504918" _parent_id="__parent_id" _type="Output" id="0e434319-78a5-44e4-860c-ed0d34b2ef0f">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="46" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/typeData/typeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="47" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/typeData/typeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="49" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7172a840-1e98-49c0-b9c4-26d85ddb559c" _parent_id="__parent_id" _type="Output" id="f236dc89-0ae0-41a9-8d9b-681516e89f18">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="49" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="50" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="52" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForTenantedReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="54550647-a7ea-4f1c-abff-57f575ccaf8d" _parent_id="__parent_id" _type="Output" id="247f825d-dc0e-411f-afdd-e1a85de58fde">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="52" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForTenantedReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="53" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForTenantedReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="57" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerTypeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d28cc135-1c4a-46c8-a612-4c28a108c713" _parent_id="__parent_id" _type="Output" id="7f9c9734-895c-4885-a16a-5258538a7fae">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="57" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerTypeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="58" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerTypeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="63" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="5e01d0f8-2a21-42f5-a489-e55af83ca75a" _parent_id="__parent_id" _type="Output" id="9ec55bcf-5562-4c2e-84c8-8b0642b90eb0">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="63" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData/typeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="64" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData/typeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="66" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="4c799db1-93ee-4c54-9493-3764275c1227" _parent_id="__parent_id" _type="Output" id="ce10c87a-46f8-41b6-9619-6f2a64ba4378">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="66" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="67" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="69" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForTenantedReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="11392004-93a8-403d-b409-3e0b2ab50965" _parent_id="__parent_id" _type="Output" id="b4267f16-e540-4fd7-baf7-8c54687b58fc">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="69" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForTenantedReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="70" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForTenantedReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="76" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7596fc24-adf2-4a05-a5eb-265c4be61421" _parent_id="__parent_id" _type="Output" id="754c5a2c-5622-40ef-be50-5c1a9574b202">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="76" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="77" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="84" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32" _parent_id="__parent_id" _type="Output" id="f0825c7a-0578-4ec6-aa4d-c47057166360">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="84" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/typeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="85" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/typeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="87" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="89f0a731-905b-43e6-a247-6aa6e368027e" _parent_id="__parent_id" _type="Output" id="8ee62650-3d3c-4f69-a078-3d2fbb02cd81">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="87" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="88" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="90" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForTenantedReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="82fd4057-579f-497a-9bae-c0b13c2aa84e" _parent_id="__parent_id" _type="Output" id="fd89042f-0354-44bf-9157-ef2131eb3469">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="90" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForTenantedReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="91" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForTenantedReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="96" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="bb70a565-3943-4f8f-9feb-a421e3128ba7" _parent_id="__parent_id" _type="Output" id="e4f4a9f0-94e5-4a82-97fa-a7960129a161">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="96" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData/typeReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="97" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData/typeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="99" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="bbc3c71e-a8b1-422a-89bd-94034fe9e3f4" _parent_id="__parent_id" _type="Output" id="4cdbd184-2bf1-455c-9de3-eecd8c8c864b">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="99" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="100" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="102" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForTenantedReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="ee57fc79-b1ae-4fad-8bae-50a964fadc09" _parent_id="__parent_id" _type="Output" id="ed58ea45-a6f9-422f-8620-87800da8f886">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="102" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForTenantedReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="103" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForTenantedReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="110" __referenceCounter="1" __sourcePath="{}/object/prospectData/prospectSourceReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="699b9430-2d37-4243-a521-59044809bd75">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="110" __sourcePath="{}/object/prospectData/prospectSourceReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="111" __sourcePath="{}/object/prospectData/prospectSourceReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="113" __referenceCounter="1" __sourcePath="{}/object/prospectReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="0cd16d3a-016e-4732-9077-ac68ac378549">
+<Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="113" __sourcePath="{}/object/prospectReference/ID/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="114" __sourcePath="{}/object/prospectReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="55" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="d28cc135-1c4a-46c8-a612-4c28a108c713">
+<Record fieldDelimiter="," name="instantMessengerData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="55" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerAddress" containerType="SINGLE" label="instantMessengerAddress" name="instantMessengerAddress" type="string"/>
+<Field __index="56" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerComment" containerType="SINGLE" label="instantMessengerComment" name="instantMessengerComment" type="string"/>
+<Field __index="59" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerTypeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="72" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="7596fc24-adf2-4a05-a5eb-265c4be61421">
+<Record fieldDelimiter="," name="phoneData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="72" __sourcePath="{}/object/prospectData/contactData/phoneData/areaCode" containerType="SINGLE" label="areaCode" name="areaCode" type="string"/>
+<Field __index="73" __sourcePath="{}/object/prospectData/contactData/phoneData/countryISOCode" containerType="SINGLE" label="countryISOCode" name="countryISOCode" type="string"/>
+<Field __index="74" __sourcePath="{}/object/prospectData/contactData/phoneData/formattedPhone" containerType="SINGLE" label="formattedPhone" name="formattedPhone" type="string"/>
+<Field __index="75" __sourcePath="{}/object/prospectData/contactData/phoneData/internationalPhoneCode" containerType="SINGLE" label="internationalPhoneCode" name="internationalPhoneCode" type="string"/>
+<Field __index="78" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+<Field __index="79" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneExtension" containerType="SINGLE" label="phoneExtension" name="phoneExtension" type="string"/>
+<Field __index="80" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneNumber" containerType="SINGLE" label="phoneNumber" name="phoneNumber" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="421cdda8-babc-4329-affb-e823678cf0d5">
+<Record fieldDelimiter="," name="PutProspectRequestType" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="107" __sourcePath="{}/object/prospectData/customerID" containerType="SINGLE" label="customerID" name="customerID" type="string"/>
+<Field __index="108" __sourcePath="{}/object/prospectData/prospectID" containerType="SINGLE" label="prospectID" name="prospectID" type="string"/>
+<Field __index="109" __sourcePath="{}/object/prospectData/prospectName" containerType="SINGLE" label="prospectName" name="prospectName" type="string"/>
+<Field __index="112" __sourcePath="{}/object/prospectData/prospectSourceReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+<Field __index="115" __sourcePath="{}/object/prospectReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor_1" type="string"/>
+<Field __index="116" __sourcePath="{}/object/version" containerType="SINGLE" label="version" name="version" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="23" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/submunicipalityData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="355b9889-b295-4a80-9f7e-7f1661cbf821">
+<Record fieldDelimiter="," name="submunicipalityData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="23" __sourcePath="{}/object/prospectData/contactData/addressData/submunicipalityData/addressComponentName" containerType="SINGLE" label="addressComponentName" name="addressComponentName" type="string"/>
+<Field __index="24" __sourcePath="{}/object/prospectData/contactData/addressData/submunicipalityData/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="25" __sourcePath="{}/object/prospectData/contactData/addressData/submunicipalityData/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="26" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/subregionData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="0d70dad4-22f1-47cd-8493-283454b55218">
+<Record fieldDelimiter="," name="subregionData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="26" __sourcePath="{}/object/prospectData/contactData/addressData/subregionData/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+<Field __index="27" __sourcePath="{}/object/prospectData/contactData/addressData/subregionData/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="28" __sourcePath="{}/object/prospectData/contactData/addressData/subregionData/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="31" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cabb9d00-baa8-4516-aac8-c5f5e5b5b081" _parent_id="__parent_id" _type="Output" id="d429e417-e6fb-4519-8ed6-942fabde2986">
+<Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="31" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/primary" containerType="SINGLE" label="primary" name="primary" type="boolean"/>
+<Field __index="34" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="45" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7bfef0da-9164-43bf-825c-3f54f0628680" _parent_id="__parent_id" _type="Output" id="0d47ca2e-2147-4c8c-9137-a7677f504918">
+<Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="45" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/typeData/primary" containerType="SINGLE" label="primary" name="primary" type="boolean"/>
+<Field __index="48" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="62" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0bfb73ae-2b51-4742-b4fa-35a876cfd1d2" _parent_id="__parent_id" _type="Output" id="5e01d0f8-2a21-42f5-a489-e55af83ca75a">
+<Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="62" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData/primary" containerType="SINGLE" label="primary" name="primary" type="boolean"/>
+<Field __index="65" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="83" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e41c627d-f974-4261-96a8-dbf791fa1c9b" _parent_id="__parent_id" _type="Output" id="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32">
+<Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="83" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/primary" containerType="SINGLE" label="primary" name="primary" type="boolean"/>
+<Field __index="86" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="95" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="089a2b46-3682-4b83-9c5e-55434fb1a50d" _parent_id="__parent_id" _type="Output" id="bb70a565-3943-4f8f-9feb-a421e3128ba7">
+<Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="95" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData/primary" containerType="SINGLE" label="primary" name="primary" type="boolean"/>
+<Field __index="98" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="29" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="cabb9d00-baa8-4516-aac8-c5f5e5b5b081">
+<Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="29" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/comments" containerType="SINGLE" label="comments" name="comments" type="string"/>
+<Field __index="30" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/public" containerType="SINGLE" label="public" name="public" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __index="43" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="82e28997-8f59-4b28-a051-08196ac602b6" _parent_id="__parent_id" _type="Output" id="7bfef0da-9164-43bf-825c-3f54f0628680">
+<Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="43" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/comments" containerType="SINGLE" label="comments" name="comments" type="string"/>
+<Field __index="44" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/public" containerType="SINGLE" label="public" name="public" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __index="60" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d28cc135-1c4a-46c8-a612-4c28a108c713" _parent_id="__parent_id" _type="Output" id="0bfb73ae-2b51-4742-b4fa-35a876cfd1d2">
+<Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="60" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/comments" containerType="SINGLE" label="comments" name="comments" type="string"/>
+<Field __index="61" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/public" containerType="SINGLE" label="public" name="public" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __index="81" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7596fc24-adf2-4a05-a5eb-265c4be61421" _parent_id="__parent_id" _type="Output" id="e41c627d-f974-4261-96a8-dbf791fa1c9b">
+<Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="81" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/comments" containerType="SINGLE" label="comments" name="comments" type="string"/>
+<Field __index="82" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/public" containerType="SINGLE" label="public" name="public" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __index="93" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d6dbcff3-feb8-4857-afdc-200386a95f63" _parent_id="__parent_id" _type="Output" id="089a2b46-3682-4b83-9c5e-55434fb1a50d">
+<Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="93" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/comments" containerType="SINGLE" label="comments" name="comments" type="string"/>
+<Field __index="94" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/public" containerType="SINGLE" label="public" name="public" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __index="35" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cabb9d00-baa8-4516-aac8-c5f5e5b5b081" _parent_id="__parent_id" _type="Output" id="0483c77e-1a39-474f-abea-f023c2a92ff6">
+<Record fieldDelimiter="," name="useForReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="37" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="49" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7bfef0da-9164-43bf-825c-3f54f0628680" _parent_id="__parent_id" _type="Output" id="7172a840-1e98-49c0-b9c4-26d85ddb559c">
+<Record fieldDelimiter="," name="useForReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="51" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="66" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0bfb73ae-2b51-4742-b4fa-35a876cfd1d2" _parent_id="__parent_id" _type="Output" id="4c799db1-93ee-4c54-9493-3764275c1227">
+<Record fieldDelimiter="," name="useForReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="68" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="87" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e41c627d-f974-4261-96a8-dbf791fa1c9b" _parent_id="__parent_id" _type="Output" id="89f0a731-905b-43e6-a247-6aa6e368027e">
+<Record fieldDelimiter="," name="useForReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="89" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="99" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="089a2b46-3682-4b83-9c5e-55434fb1a50d" _parent_id="__parent_id" _type="Output" id="bbc3c71e-a8b1-422a-89bd-94034fe9e3f4">
+<Record fieldDelimiter="," name="useForReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="101" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="38" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForTenantedReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cabb9d00-baa8-4516-aac8-c5f5e5b5b081" _parent_id="__parent_id" _type="Output" id="13d18564-79f2-4c97-bf8a-65b8f5950920">
+<Record fieldDelimiter="," name="useForTenantedReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="40" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/useForTenantedReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="52" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForTenantedReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7bfef0da-9164-43bf-825c-3f54f0628680" _parent_id="__parent_id" _type="Output" id="54550647-a7ea-4f1c-abff-57f575ccaf8d">
+<Record fieldDelimiter="," name="useForTenantedReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="54" __sourcePath="{}/object/prospectData/contactData/emailAddressData/usageData/useForTenantedReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="69" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForTenantedReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0bfb73ae-2b51-4742-b4fa-35a876cfd1d2" _parent_id="__parent_id" _type="Output" id="11392004-93a8-403d-b409-3e0b2ab50965">
+<Record fieldDelimiter="," name="useForTenantedReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="71" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForTenantedReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="90" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForTenantedReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e41c627d-f974-4261-96a8-dbf791fa1c9b" _parent_id="__parent_id" _type="Output" id="82fd4057-579f-497a-9bae-c0b13c2aa84e">
+<Record fieldDelimiter="," name="useForTenantedReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="92" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/useForTenantedReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="102" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForTenantedReference" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="089a2b46-3682-4b83-9c5e-55434fb1a50d" _parent_id="__parent_id" _type="Output" id="ee57fc79-b1ae-4fad-8bae-50a964fadc09">
+<Record fieldDelimiter="," name="useForTenantedReference" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="104" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/useForTenantedReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="93" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/webAddressData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="d6dbcff3-feb8-4857-afdc-200386a95f63">
+<Record fieldDelimiter="," name="webAddressData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __index="105" __sourcePath="{}/object/prospectData/contactData/webAddressData/webAddress" containerType="SINGLE" label="webAddress" name="webAddress" type="string"/>
+<Field __index="106" __sourcePath="{}/object/prospectData/contactData/webAddressData/webAddressComment" containerType="SINGLE" label="webAddressComment" name="webAddressComment" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="extSourceID" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry3" input="true" name="extSourceIDType" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry4" input="true" name="referenceWID" output="false" type="string"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Map&lt;k,v&gt; READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="city" trim="true" xpath="BillingAddress/city"/>
+  <Mapping cloverField="country" trim="true" xpath="BillingAddress/country"/>
+  <Mapping cloverField="countryCode" trim="true" xpath="BillingAddress/countryCode"/>
+  <Mapping cloverField="postalCode" trim="true" xpath="BillingAddress/postalCode"/>
+  <Mapping cloverField="state" trim="true" xpath="BillingAddress/state"/>
+  <Mapping cloverField="stateCode" trim="true" xpath="BillingAddress/stateCode"/>
+  <Mapping cloverField="street" trim="true" xpath="BillingAddress/street"/>
+  <Mapping cloverField="Description" trim="true" xpath="Description"/>
+  <Mapping cloverField="Id" trim="true" xpath="Id"/>
+  <Mapping cloverField="Industry" trim="true" xpath="Industry"/>
+  <Mapping cloverField="LastModifiedDate" trim="true" xpath="LastModifiedDate"/>
+  <Mapping cloverField="Name" trim="true" xpath="Name"/>
+  <Mapping cloverField="Type" trim="true" xpath="Type"/>
+  <Mapping cloverField="Website" trim="true" xpath="Website"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <prospectData>
+    <contactData>
+      <clover:collection clover:name="webAddressData">
+        <item clover:inPort="2" clover:key="__parent_id" clover:parentKey="__id">
+          <clover:collection clover:name="usageData">
+            <item>
+              <clover:collection clover:name="typeData">
+                <item clover:inPort="3" clover:key="__parent_id" clover:parentKey="__id">
+                  <primary>$3.primary</primary>
+                  <typeReference>
+                    <clover:collection clover:name="ID">
+                      <item clover:inPort="4" clover:key="__parent_id" clover:parentKey="__id">
+                        <type>$4.type</type>
+                        <value>$4.value</value>
+                      </item>
+                    </clover:collection>
+                    <descriptor>$3.descriptor</descriptor>
+                  </typeReference>
+                </item>
+              </clover:collection>
+            </item>
+          </clover:collection>
+          <webAddress>$2.webAddress</webAddress>
+          <webAddressComment>$2.webAddressComment</webAddressComment>
+        </item>
+      </clover:collection>
+    </contactData>
+    <customerID>$0.customerID</customerID>
+    <prospectID>$0.prospectID</prospectID>
+    <prospectName>$0.prospectName</prospectName>
+    <prospectSourceReference>
+      <clover:collection clover:name="ID">
+        <item clover:inPort="1" clover:key="__parent_id" clover:parentKey="__id">
+          <type>$1.type</type>
+          <value>$1.value</value>
+        </item>
+      </clover:collection>
+      <descriptor>$0.descriptor</descriptor>
+    </prospectSourceReference>
+  </prospectData>
+  <prospectReference>
+    <clover:collection clover:name="ID">
+      <item clover:inPort="5" clover:key="__parent_id" clover:parentKey="__id">
+        <type>$5.type</type>
+        <value>$5.value</value>
+      </item>
+    </clover:collection>
+    <descriptor>$0.descriptor_1</descriptor>
+  </prospectReference>
+  <version>$0.version</version>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="com.workday.revenue.PutProspectRequestType"/>
+  <typed-object type="com.workday.revenue.InstantMessengerTypeObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.InstantMessengerTypeObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.AddressReferenceObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CountryRegionObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.WebAddressInformationDataType">
+    <schema-collection name="usageData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationMethodUsageInformationDataType"/>
+    </schema-collection>
+    <typed-object-ref name="webAddress" type-ref="java.lang.String"/>
+    <typed-object-ref name="webAddressComment" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.InstantMessengerTypeObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.ContactInformationDataType">
+    <schema-collection name="addressData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.AddressInformationDataType"/>
+    </schema-collection>
+    <schema-collection name="emailAddressData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.EmailAddressInformationDataType"/>
+    </schema-collection>
+    <schema-collection name="instantMessengerData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.InstantMessengerInformationDataType"/>
+    </schema-collection>
+    <schema-collection name="phoneData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.PhoneInformationDataType"/>
+    </schema-collection>
+    <schema-collection name="webAddressData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.WebAddressInformationDataType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageBehaviorObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationUsageBehaviorObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationMethodUsageInformationDataType">
+    <typed-object-ref name="comments" type-ref="java.lang.String"/>
+    <typed-object-ref name="public" type-ref="java.lang.Boolean"/>
+    <schema-collection name="typeData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationUsageTypeDataType"/>
+    </schema-collection>
+    <schema-collection name="useForReference" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationUsageBehaviorObjectType"/>
+    </schema-collection>
+    <schema-collection name="useForTenantedReference" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationUsageBehaviorTenantedObjectType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.workday.revenue.ProspectObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.ProspectObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.SubmunicipalityInformationDataType">
+    <typed-object-ref name="addressComponentName" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.AddressInformationDataType">
+    <typed-object-ref name="addressFormatType" type-ref="java.lang.String"/>
+    <typed-object-ref name="addressID" type-ref="java.lang.String"/>
+    <schema-collection name="addressLineData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.AddressLineInformationDataType"/>
+    </schema-collection>
+    <typed-object-ref name="addressReference" type-ref="com.workday.revenue.AddressReferenceObjectType"/>
+    <typed-object-ref name="countryReference" type-ref="com.workday.revenue.CountryObjectType"/>
+    <typed-object-ref name="countryRegionReference" type-ref="com.workday.revenue.CountryRegionObjectType"/>
+    <typed-object-ref name="defaultedBusinessSiteAddress" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="delete" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="doNotReplaceAll" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="effectiveDate" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="formattedAddress" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModified" type-ref="javax.xml.datatype.XMLGregorianCalendar"/>
+    <typed-object-ref name="municipality" type-ref="java.lang.String"/>
+    <typed-object-ref name="municipalityLocal" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCode" type-ref="java.lang.String"/>
+    <schema-collection name="submunicipalityData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.SubmunicipalityInformationDataType"/>
+    </schema-collection>
+    <schema-collection name="subregionData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.SubregionInformationDataType"/>
+    </schema-collection>
+    <schema-collection name="usageData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationMethodUsageInformationDataType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.workday.revenue.ProspectObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.AddressLineInformationDataType">
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="com.workday.revenue.ProspectDataType">
+    <typed-object-ref name="contactData" type-ref="com.workday.revenue.ContactInformationDataType"/>
+    <typed-object-ref name="customerID" type-ref="java.lang.String"/>
+    <typed-object-ref name="prospectID" type-ref="java.lang.String"/>
+    <typed-object-ref name="prospectName" type-ref="java.lang.String"/>
+    <typed-object-ref name="prospectSourceReference" type-ref="com.workday.revenue.ExternalSourceObjectType"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="com.workday.revenue.SubregionInformationDataType">
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageBehaviorTenantedObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationUsageBehaviorTenantedObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageTypeObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.EmailAddressInformationDataType">
+    <typed-object-ref name="emailAddress" type-ref="java.lang.String"/>
+    <typed-object-ref name="emailComment" type-ref="java.lang.String"/>
+    <schema-collection name="usageData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationMethodUsageInformationDataType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.workday.revenue.PhoneInformationDataType">
+    <typed-object-ref name="areaCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryISOCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="formattedPhone" type-ref="java.lang.String"/>
+    <typed-object-ref name="internationalPhoneCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="phoneDeviceTypeReference" type-ref="com.workday.revenue.PhoneDeviceTypeObjectType"/>
+    <typed-object-ref name="phoneExtension" type-ref="java.lang.String"/>
+    <typed-object-ref name="phoneNumber" type-ref="java.lang.String"/>
+    <schema-collection name="usageData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationMethodUsageInformationDataType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageTypeObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationUsageTypeObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageBehaviorTenantedObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.InstantMessengerInformationDataType">
+    <typed-object-ref name="instantMessengerAddress" type-ref="java.lang.String"/>
+    <typed-object-ref name="instantMessengerComment" type-ref="java.lang.String"/>
+    <typed-object-ref name="instantMessengerTypeReference" type-ref="com.workday.revenue.InstantMessengerTypeObjectType"/>
+    <schema-collection name="usageData" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CommunicationMethodUsageInformationDataType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="com.workday.revenue.PhoneDeviceTypeObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.AddressReferenceObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.AddressReferenceObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageTypeDataType">
+    <typed-object-ref name="primary" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="typeReference" type-ref="com.workday.revenue.CommunicationUsageTypeObjectType"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.PutProspectRequestType">
+    <typed-object-ref name="prospectData" type-ref="com.workday.revenue.ProspectDataType"/>
+    <typed-object-ref name="prospectReference" type-ref="com.workday.revenue.ProspectObjectType"/>
+    <typed-object-ref name="version" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CountryObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CountryObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="javax.xml.datatype.XMLGregorianCalendar"/>
+  <typed-object type="com.workday.revenue.CountryRegionObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.CountryRegionObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.ExternalSourceObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.ExternalSourceObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CommunicationUsageBehaviorObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.CountryObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.PhoneDeviceTypeObjectType">
+    <schema-collection name="ID" type="java.util.List">
+      <typed-object-ref type-ref="com.workday.revenue.PhoneDeviceTypeObjectIDType"/>
+    </schema-collection>
+    <typed-object-ref name="descriptor" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="com.workday.revenue.ExternalSourceObjectIDType">
+    <typed-object-ref name="type" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+<attr name="__metadata"><![CDATA[true]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; prospectSourceReference 'ID'" guiX="460" guiY="120" id="FOREACH_ACCOUNT_ID" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = inputArguments.extSourceIDType;
+output.value = inputArguments.extSourceID;]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'Website Usage Data'" guiX="460" guiY="420" id="FOREACH_ACCOUNT_ID1" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[if(!isnull(input.Website)){
+//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+  output.type = "Communication_Usage_Type_ID";
+  output.value = "HOME";
+}]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; prospectReference 'ID'" guiX="460" guiY="520" id="FOREACH_ACCOUNT_ID2" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = "WID";
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'Prospect'" guiX="460" guiY="20" id="FOREACH_ACCOUNT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.prospectName = input.Name;
+output.prospectID = input.Id;
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'typeData'" guiX="460" guiY="320" id="FOREACH_ACCOUNT_TYPE_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[if(!isnull(input.Website)){
+//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.primary = true;
+}]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'webAddressData'" guiX="460" guiY="220" id="FOREACH_ACCOUNT_WEB_ADDRESS_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[if(!isnull(input.Website)){
+//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+
+output.webAddress = (input.Website.startsWith("http://") || input.Website.startsWith("https://")) ? input.Website : "http://" + input.Website;
+
+}]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Duplicate Account" guiX="240" guiY="20" id="SIMPLE_COPY0" type="SIMPLE_COPY"/>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 0 (out)" toNode="SIMPLE_COPY0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID:0" guiBendpoints="" id="Edge4" inPort="Port 1 (in)" metadata="699b9430-2d37-4243-a521-59044809bd75" outPort="Port 0 (out)" toNode="BEAN_WRITER0:1"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID1:0" guiBendpoints="" id="Edge10" inPort="Port 4 (in)" metadata="e4f4a9f0-94e5-4a82-97fa-a7960129a161" outPort="Port 0 (out)" toNode="BEAN_WRITER0:4"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID2:0" guiBendpoints="" id="Edge12" inPort="Port 5 (in)" metadata="0cd16d3a-016e-4732-9077-ac68ac378549" outPort="Port 0 (out)" toNode="BEAN_WRITER0:5"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="421cdda8-babc-4329-affb-e823678cf0d5" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_TYPE_DATA:0" guiBendpoints="" id="Edge8" inPort="Port 3 (in)" metadata="bb70a565-3943-4f8f-9feb-a421e3128ba7" outPort="Port 0 (out)" toNode="BEAN_WRITER0:3"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_WEB_ADDRESS_DATA:0" guiBendpoints="" id="Edge6" inPort="Port 2 (in)" metadata="d6dbcff3-feb8-4857-afdc-200386a95f63" outPort="Port 0 (out)" toNode="BEAN_WRITER0:2"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 0 (out)" toNode="FOREACH_ACCOUNT_OBJECT:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:1" guiBendpoints="" id="Edge3" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 1 (out)" toNode="FOREACH_ACCOUNT_ID:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:2" guiBendpoints="" id="Edge5" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 2 (out)" toNode="FOREACH_ACCOUNT_WEB_ADDRESS_DATA:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:3" guiBendpoints="" id="Edge7" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 3 (out)" toNode="FOREACH_ACCOUNT_TYPE_DATA:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:4" guiBendpoints="" id="Edge9" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 4 (out)" toNode="FOREACH_ACCOUNT_ID1:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:5" guiBendpoints="" id="Edge11" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 5 (out)" toNode="FOREACH_ACCOUNT_ID2:0"/>
+</Phase>
+</Graph>

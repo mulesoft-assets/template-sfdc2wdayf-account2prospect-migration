@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>org.mule.templates</groupId>
 		<artifactId>templates-tooling-parent-pom</artifactId>
 		<version>1.1.6</version>
 	</parent>
+
+	<properties>
+		<wday.version>4.0.1</wday.version>
+		<wday.rev.version>4.1.1</wday.rev.version>
+	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>template-sfdc2wdayf-account2prospect-migration</artifactId>
@@ -17,8 +23,8 @@
 		<connection>scm:git:https://github.com/mulesoft/template-sfdc2wdayf-account2prospect-migration.git</connection>
 		<developerConnection>scm:git:https://github.com/mulesoft/template-sfdc2wdayf-account2prospect-migration.git</developerConnection>
 		<url>https://github.com/mulesoft/template-sfdc2wdayf-account2prospect-migration</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<build>
 		<plugins>
@@ -32,35 +38,67 @@
 							<groupId>org.mule.modules</groupId>
 							<artifactId>mule-module-sfdc</artifactId>
 						</inclusion>
-					<inclusion>
-                            <groupId>org.mule.modules</groupId>
-                            <artifactId>mule-module-workday-financialmanagement</artifactId>
-                        </inclusion>
-                    </inclusions>
+						<inclusion>
+							<groupId>org.mule.modules</groupId>
+							<artifactId>mule-module-workday-revenuemanagement</artifactId>
+						</inclusion>
+						<inclusion>
+							<groupId>org.mule.modules</groupId>
+							<artifactId>mule-module-workday</artifactId>
+						</inclusion>
+					</inclusions>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
-		
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-sfdc</artifactId>
 			<version>${sfdc.version}</version>
 		</dependency>
-	<dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-workday-financialmanagement</artifactId>
-            <version>${wday.fin.version}</version>
-        </dependency>
-    <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-http</artifactId>
-            <version>${mule.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.mulesoft.muleesb.modules</groupId>
+			<artifactId>mule-module-batch-ee</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-spring-config</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-http</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-workday-revenuemanagement</artifactId>
+			<version>${wday.rev.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-json</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-workday</artifactId>
+			<version>${wday.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.muleesb.modules</groupId>
+			<artifactId>mule-module-data-mapper</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<repositories>
 		<repository>
