@@ -41,7 +41,7 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 	private static final String PATH_TO_TEST_PROPERTIES = "./src/test/resources/mule.test.properties";
 	protected static final int TIMEOUT_SECONDS = 300;
 	private BatchTestHelper helper;
-	private String SFDC_TEST_USER_ID;
+	private String SFDC_TEST_ACCOUNT_ID;
 	
 	private static SubflowInterceptingChainLifecycleWrapper retrieveProspectFromWorkdayFlow;
 	private static SubflowInterceptingChainLifecycleWrapper updateAccountInSalesforceFlow;
@@ -64,7 +64,7 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 		} catch (Exception e) {
 			logger.error("Error occured while reading mule.test.properties", e);
 		}
-		SFDC_TEST_USER_ID = props.getProperty("sfdc.testuser.id");
+		SFDC_TEST_ACCOUNT_ID = props.getProperty("sfdc.testaccount.id");
 		
 		getAndInitializeFlows();
 	}
@@ -81,7 +81,7 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 	public void editTestDataInSandbox(String name, String website) throws Exception {
 		// create object to edit the test account with
 		Map<String, Object> account = SfdcObjectBuilder.anAccount()
-				.with("Id", SFDC_TEST_USER_ID)
+				.with("Id", SFDC_TEST_ACCOUNT_ID)
 				.with("Name", name)
 				.with("Website", website)
 				.build();
@@ -125,7 +125,7 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 		helper.assertJobWasSuccessful();
 
 		// get updated prospect from Workday
-		GetProspectsRequestType request = ProspectRequest.createByID(SFDC_TEST_USER_ID);
+		GetProspectsRequestType request = ProspectRequest.createByID(SFDC_TEST_ACCOUNT_ID);
 
 		MuleEvent event = retrieveProspectFromWorkdayFlow.process(getTestEvent(request, MessageExchangePattern.REQUEST_RESPONSE));
 		GetProspectsResponseType response = (GetProspectsResponseType) event.getMessage().getPayload();
