@@ -75,7 +75,7 @@ WHERE Type = 'Prospect'"
 						level="INFO" doc:name="log 'Migration process has finished'" />
 				</processor-chain>
 				<processor-chain>
-					<parse-template location=".\src\main\resources\email\body.html"
+					<parse-template location="./src/main/resources/email/body.html"
 						doc:name="Parse Template" />
 					<smtp:outbound-endpoint host="${smtp.host}"
 						port="${smtp.port}" user="${smtp.user}" password="${smtp.password}"
