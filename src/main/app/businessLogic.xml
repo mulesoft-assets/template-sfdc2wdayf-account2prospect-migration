@@ -55,7 +55,7 @@ WHERE Type = 'Prospect'"
 	payload.prospectReference = null;
 } else {
 	// Add target system ID value as it is an update
-	payload.prospectReference.ID[0].value = recordVars['wdayfProspect'].responseData.prospect[0].prospectReference.ID[0].value;
+	payload.prospectReference.ID[0].value = recordVars['wdayfProspect'].responseData.prospect[0].prospectData.prospectID;
 }
 ]]></expression-component>
 				<wd-revenue:put-prospect config-ref="Workday_Revenue_Management"

@@ -784,7 +784,7 @@ output.__parent_id = input.__id;
 output.__id = input.__id;
 output.__parent_id = input.__id;
 //END -> DO NOT REMOVE
-output.type = "WID";
+output.type = "Prospect_Reference_ID";
 ]]></attr>
 </Node>
 <Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'Prospect'" guiX="460" guiY="20" id="FOREACH_ACCOUNT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
