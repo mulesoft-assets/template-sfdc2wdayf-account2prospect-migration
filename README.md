@@ -186,15 +186,15 @@ In order to use this Mule Anypoint Template you need to configure properties (Cr
 
 **SMTP Services configuration**
 
-smtp.host `smtp.gmail.com`
-smtp.port `587`
-smtp.user `gmail_user`
-smtp.password `gmail_password`
++ smtp.host `smtp.gmail.com`
++ smtp.port `587`
++ smtp.user `gmail_user`
++ smtp.password `gmail_password`
 
 **EMail Details**
 
 + mail.from `batch.migrateaccounts.migration%40mulesoft.com`
-+ mail.to `cesar.garcia@mulesoft.com`
++ mail.to `john.doe@mulesoft.com`
 + mail.subject `Batch Job Finished Report`
 
 # API Calls <a name="apicalls"/>
