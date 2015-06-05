@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Admin" created="Wed Mar 11 08:29:59 CET 2015" description="Map To PutProspectRequestType" guiVersion="3.4.4.P" id="1426075812236" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Mar 11 08:29:59 CET 2015" modifiedBy="Admin" name="Map_To_PutProspectRequestType" revision="1.0" showComponentDetails="false">
 <Global>
-<Metadata __index="0" __referenceCounter="6" __sourcePath="{}/Account" _dataStructure="OBJECT" _id="__id" _type="Input" id="214b9298-678c-465a-91ed-4de108a249db">
+<Metadata __index="0" __referenceCounter="18" __sourcePath="{}/Account" _dataStructure="OBJECT" _id="__id" _type="Input" id="214b9298-678c-465a-91ed-4de108a249db">
 <Record fieldDelimiter="," name="Account" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __index="9" __sourcePath="{}/Account/BillingAddress/city" containerType="SINGLE" label="city" name="city" type="string"/>
@@ -17,9 +17,10 @@
 <Field __index="1" __sourcePath="{}/Account/Name" containerType="SINGLE" label="Name" name="Name" type="string"/>
 <Field __index="12" __sourcePath="{}/Account/Type" containerType="SINGLE" label="Type" name="Type" type="string"/>
 <Field __sourcePath="{}/Account/Website" containerType="SINGLE" label="Website" name="Website" type="string"/>
+<Field __sourcePath="{}/Account/Phone" containerType="SINGLE" label="Phone" name="Phone" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="0" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f">
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f">
 <Record fieldDelimiter="," name="addressData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -39,13 +40,19 @@
 <Field __index="22" __sourcePath="{}/object/prospectData/contactData/addressData/postalCode" containerType="SINGLE" label="postalCode" name="postalCode" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="2" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="9d9f867b-a9a9-4908-a9b9-d5e27ac91563">
+<Metadata __index="2" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="9d9f867b-a9a9-4908-a9b9-d5e27ac91563">
 <Record fieldDelimiter="," name="addressLineData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __index="2" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
 <Field __index="3" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData/type" containerType="SINGLE" label="type" name="type" type="string"/>
 <Field __index="4" __sourcePath="{}/object/prospectData/contactData/addressData/addressLineData/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata _type="Lookup" id="c28f1263-2525-414c-9c48-5832686b8934">
+<Record fieldDelimiter="," name="countryLookup" recordDelimiter="&#10;" type="delimited">
+<Field containerType="SINGLE" label="sfdcCountry" name="sfdcCountry" type="string"/>
+<Field containerType="SINGLE" label="wdayCountry" name="wdayCountry" type="string"/>
 </Record>
 </Metadata>
 <Metadata __index="41" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/emailAddressData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="82e28997-8f59-4b28-a051-08196ac602b6">
@@ -64,7 +71,7 @@
 <Field __index="6" __sourcePath="{}/object/prospectData/contactData/addressData/addressReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="8" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="fb16407c-e2f5-4f07-a850-ce6d8be1416c">
+<Metadata __index="8" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="fb16407c-e2f5-4f07-a850-ce6d8be1416c">
 <Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -72,7 +79,7 @@
 <Field __index="9" __sourcePath="{}/object/prospectData/contactData/addressData/countryReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="11" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="faa6a3bf-2e3c-45cb-88db-9226a6c2c18d">
+<Metadata __index="11" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="faa6a3bf-2e3c-45cb-88db-9226a6c2c18d">
 <Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -80,7 +87,7 @@
 <Field __index="12" __sourcePath="{}/object/prospectData/contactData/addressData/countryRegionReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="32" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d429e417-e6fb-4519-8ed6-942fabde2986" _parent_id="__parent_id" _type="Output" id="bf264a10-8f8f-487d-958f-67713bbcef3f">
+<Metadata __index="32" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d429e417-e6fb-4519-8ed6-942fabde2986" _parent_id="__parent_id" _type="Output" id="bf264a10-8f8f-487d-958f-67713bbcef3f">
 <Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -160,7 +167,7 @@
 <Field __index="70" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/useForTenantedReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="76" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7596fc24-adf2-4a05-a5eb-265c4be61421" _parent_id="__parent_id" _type="Output" id="754c5a2c-5622-40ef-be50-5c1a9574b202">
+<Metadata __index="76" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7596fc24-adf2-4a05-a5eb-265c4be61421" _parent_id="__parent_id" _type="Output" id="754c5a2c-5622-40ef-be50-5c1a9574b202">
 <Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -168,7 +175,7 @@
 <Field __index="77" __sourcePath="{}/object/prospectData/contactData/phoneData/phoneDeviceTypeReference/ID/value" containerType="SINGLE" label="value" name="value" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="84" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32" _parent_id="__parent_id" _type="Output" id="f0825c7a-0578-4ec6-aa4d-c47057166360">
+<Metadata __index="84" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData/typeReference/ID" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32" _parent_id="__parent_id" _type="Output" id="f0825c7a-0578-4ec6-aa4d-c47057166360">
 <Record fieldDelimiter="," name="ID" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -241,7 +248,7 @@
 <Field __index="59" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/instantMessengerTypeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="72" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="7596fc24-adf2-4a05-a5eb-265c4be61421">
+<Metadata __index="72" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/phoneData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="421cdda8-babc-4329-affb-e823678cf0d5" _parent_id="__parent_id" _type="Output" id="7596fc24-adf2-4a05-a5eb-265c4be61421">
 <Record fieldDelimiter="," name="phoneData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -265,6 +272,12 @@
 <Field __index="116" __sourcePath="{}/object/version" containerType="SINGLE" label="version" name="version" type="string"/>
 </Record>
 </Metadata>
+<Metadata _type="Lookup" id="7de3390a-aa7f-488b-9e6f-c7c26fabad80">
+<Record fieldDelimiter="," name="stateLookup" recordDelimiter="&#10;" type="delimited">
+<Field containerType="SINGLE" label="sfdcState" name="sfdcState" type="string"/>
+<Field containerType="SINGLE" label="wdayState" name="wdayState" type="string"/>
+</Record>
+</Metadata>
 <Metadata __index="23" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/submunicipalityData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="355b9889-b295-4a80-9f7e-7f1661cbf821">
 <Record fieldDelimiter="," name="submunicipalityData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
@@ -283,7 +296,7 @@
 <Field __index="28" __sourcePath="{}/object/prospectData/contactData/addressData/subregionData/value" containerType="SINGLE" label="value" name="value" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="31" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cabb9d00-baa8-4516-aac8-c5f5e5b5b081" _parent_id="__parent_id" _type="Output" id="d429e417-e6fb-4519-8ed6-942fabde2986">
+<Metadata __index="31" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cabb9d00-baa8-4516-aac8-c5f5e5b5b081" _parent_id="__parent_id" _type="Output" id="d429e417-e6fb-4519-8ed6-942fabde2986">
 <Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -307,7 +320,7 @@
 <Field __index="65" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="83" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e41c627d-f974-4261-96a8-dbf791fa1c9b" _parent_id="__parent_id" _type="Output" id="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32">
+<Metadata __index="83" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData/typeData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e41c627d-f974-4261-96a8-dbf791fa1c9b" _parent_id="__parent_id" _type="Output" id="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32">
 <Record fieldDelimiter="," name="typeData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -323,7 +336,7 @@
 <Field __index="98" __sourcePath="{}/object/prospectData/contactData/webAddressData/usageData/typeData/typeReference/descriptor" containerType="SINGLE" label="descriptor" name="descriptor" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="29" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/addressData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="cabb9d00-baa8-4516-aac8-c5f5e5b5b081">
+<Metadata __index="29" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/addressData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" _parent_id="__parent_id" _type="Output" id="cabb9d00-baa8-4516-aac8-c5f5e5b5b081">
 <Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -347,7 +360,7 @@
 <Field __index="61" __sourcePath="{}/object/prospectData/contactData/instantMessengerData/usageData/public" containerType="SINGLE" label="public" name="public" type="boolean"/>
 </Record>
 </Metadata>
-<Metadata __index="81" __referenceCounter="0" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7596fc24-adf2-4a05-a5eb-265c4be61421" _parent_id="__parent_id" _type="Output" id="e41c627d-f974-4261-96a8-dbf791fa1c9b">
+<Metadata __index="81" __referenceCounter="1" __sourcePath="{}/object/prospectData/contactData/phoneData/usageData" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="7596fc24-adf2-4a05-a5eb-265c4be61421" _parent_id="__parent_id" _type="Output" id="e41c627d-f974-4261-96a8-dbf791fa1c9b">
 <Record fieldDelimiter="," name="usageData" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
@@ -441,12 +454,28 @@
 <Field __index="106" __sourcePath="{}/object/prospectData/contactData/webAddressData/webAddressComment" containerType="SINGLE" label="webAddressComment" name="webAddressComment" type="string"/>
 </Record>
 </Metadata>
+<LookupTable id="countryLookup" key="sfdcCountry" metadata="c28f1263-2525-414c-9c48-5832686b8934" name="countryLookup" type="simpleLookup">
+<attr name="lookupType"><![CDATA[UserDefined]]></attr>
+<attr name="data"><![CDATA[USA,USA
+]]></attr>
+</LookupTable>
+<LookupTable id="stateLookup" key="sfdcState" metadata="7de3390a-aa7f-488b-9e6f-c7c26fabad80" name="stateLookup" type="simpleLookup">
+<attr name="lookupType"><![CDATA[UserDefined]]></attr>
+<attr name="data"><![CDATA[CA,USA-CA
+]]></attr>
+</LookupTable>
 <Dictionary>
 <Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
 <Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
-<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="extSourceID" output="false" type="string"/>
-<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry3" input="true" name="extSourceIDType" output="false" type="string"/>
-<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry4" input="true" name="referenceWID" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry10" input="true" name="state" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="phone" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry3" input="true" name="extSourceID" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry4" input="true" name="extSourceIDType" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry5" input="true" name="referenceWID" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry6" input="true" name="postalCode" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry7" input="true" name="city" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry8" input="true" name="street" output="false" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry9" input="true" name="country" output="false" type="string"/>
 </Dictionary>
 </Global>
 <Phase number="0">
@@ -467,6 +496,7 @@
   <Mapping cloverField="Name" trim="true" xpath="Name"/>
   <Mapping cloverField="Type" trim="true" xpath="Type"/>
   <Mapping cloverField="Website" trim="true" xpath="Website"/>
+  <Mapping cloverField="Phone" trim="true" xpath="Phone"/>
 </Context>
 ]]></attr>
 <attr name="_data_format"><![CDATA[MAP]]></attr>
@@ -476,6 +506,108 @@
 <object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
   <prospectData>
     <contactData>
+      <clover:collection clover:name="addressData">
+        <item clover:inPort="6" clover:key="__parent_id" clover:parentKey="__id">
+          <addressFormatType>$6.addressFormatType</addressFormatType>
+          <addressID>$6.addressID</addressID>
+          <clover:collection clover:name="addressLineData">
+            <item clover:inPort="7" clover:key="__parent_id" clover:parentKey="__id">
+              <descriptor>$7.descriptor</descriptor>
+              <type>$7.type</type>
+              <value>$7.value</value>
+            </item>
+          </clover:collection>
+          <addressReference>
+            <descriptor>$6.descriptor</descriptor>
+          </addressReference>
+          <countryReference>
+            <clover:collection clover:name="ID">
+              <item clover:inPort="11" clover:key="__parent_id" clover:parentKey="__id">
+                <type>$11.type</type>
+                <value>$11.value</value>
+              </item>
+            </clover:collection>
+            <descriptor>$6.descriptor_1</descriptor>
+          </countryReference>
+          <countryRegionReference>
+            <clover:collection clover:name="ID">
+              <item clover:inPort="12" clover:key="__parent_id" clover:parentKey="__id">
+                <type>$12.type</type>
+                <value>$12.value</value>
+              </item>
+            </clover:collection>
+            <descriptor>$6.descriptor_2</descriptor>
+          </countryRegionReference>
+          <defaultedBusinessSiteAddress>$6.defaultedBusinessSiteAddress</defaultedBusinessSiteAddress>
+          <delete>$6.delete</delete>
+          <doNotReplaceAll>$6.doNotReplaceAll</doNotReplaceAll>
+          <effectiveDate>$6.effectiveDate</effectiveDate>
+          <formattedAddress>$6.formattedAddress</formattedAddress>
+          <lastModified>$6.lastModified</lastModified>
+          <municipality>$6.municipality</municipality>
+          <municipalityLocal>$6.municipalityLocal</municipalityLocal>
+          <postalCode>$6.postalCode</postalCode>
+          <clover:collection clover:name="usageData">
+            <item clover:inPort="9" clover:key="__parent_id" clover:parentKey="__id">
+              <comments>$9.comments</comments>
+              <public>$9.public</public>
+              <clover:collection clover:name="typeData">
+                <item clover:inPort="10" clover:key="__parent_id" clover:parentKey="__id">
+                  <primary>$10.primary</primary>
+                  <typeReference>
+                    <clover:collection clover:name="ID">
+                      <item clover:inPort="8" clover:key="__parent_id" clover:parentKey="__id">
+                        <type>$8.type</type>
+                        <value>$8.value</value>
+                      </item>
+                    </clover:collection>
+                    <descriptor>$10.descriptor</descriptor>
+                  </typeReference>
+                </item>
+              </clover:collection>
+            </item>
+          </clover:collection>
+        </item>
+      </clover:collection>
+      <clover:collection clover:name="phoneData">
+        <item clover:inPort="17" clover:key="__parent_id" clover:parentKey="__id">
+          <areaCode>$17.areaCode</areaCode>
+          <countryISOCode>$17.countryISOCode</countryISOCode>
+          <formattedPhone>$17.formattedPhone</formattedPhone>
+          <internationalPhoneCode>$17.internationalPhoneCode</internationalPhoneCode>
+          <phoneDeviceTypeReference>
+            <clover:collection clover:name="ID">
+              <item clover:inPort="16" clover:key="__parent_id" clover:parentKey="__id">
+                <type>$16.type</type>
+                <value>$16.value</value>
+              </item>
+            </clover:collection>
+            <descriptor>$17.descriptor</descriptor>
+          </phoneDeviceTypeReference>
+          <phoneExtension>$17.phoneExtension</phoneExtension>
+          <phoneNumber>$17.phoneNumber</phoneNumber>
+          <clover:collection clover:name="usageData">
+            <item clover:inPort="15" clover:key="__parent_id" clover:parentKey="__id">
+              <comments>$15.comments</comments>
+              <public>$15.public</public>
+              <clover:collection clover:name="typeData">
+                <item clover:inPort="14" clover:key="__parent_id" clover:parentKey="__id">
+                  <primary>$14.primary</primary>
+                  <typeReference>
+                    <clover:collection clover:name="ID">
+                      <item clover:inPort="13" clover:key="__parent_id" clover:parentKey="__id">
+                        <type>$13.type</type>
+                        <value>$13.value</value>
+                      </item>
+                    </clover:collection>
+                    <descriptor>$14.descriptor</descriptor>
+                  </typeReference>
+                </item>
+              </clover:collection>
+            </item>
+          </clover:collection>
+        </item>
+      </clover:collection>
       <clover:collection clover:name="webAddressData">
         <item clover:inPort="2" clover:key="__parent_id" clover:parentKey="__id">
           <clover:collection clover:name="usageData">
@@ -758,6 +890,25 @@
 ]]></attr>
 <attr name="__metadata"><![CDATA[true]]></attr>
 </Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'addressData'" guiX="460" guiY="620" id="FOREACH_ACCOUNT_ADDRESS_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.postalCode = (isnull(input.postalCode) ? inputArguments.postalCode : input.postalCode);
+output.effectiveDate = str2calendar(input.LastModifiedDate, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+output.municipality = (isnull(input.city) ? inputArguments.city : input.city);]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'addressLineData'" guiX="460" guiY="720" id="FOREACH_ACCOUNT_ADDRESS_LINE_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.value = isnull(input.street) ? inputArguments.street : input.street;
+output.type = "ADDRESS_LINE_1";]]></attr>
+</Node>
 <Node enabled="enabled" guiName="Foreach 'Account' -&gt; prospectSourceReference 'ID'" guiX="460" guiY="120" id="FOREACH_ACCOUNT_ID" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
 <attr name="melScript"><![CDATA[//MEL
 //START -> DO NOT REMOVE
@@ -787,6 +938,53 @@ output.__parent_id = input.__id;
 output.type = "Prospect_Reference_ID";
 ]]></attr>
 </Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; addressData/usageData/TypeData/typeReference 'ID'" guiX="460" guiY="820" id="FOREACH_ACCOUNT_ID3" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = "Communication_Usage_Type_ID";
+output.value = "HOME";
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; countryReference 'ID'" guiX="460" guiY="1120" id="FOREACH_ACCOUNT_ID4" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = "ISO_3166-1_Alpha-3_Code";
+output.value = (isnull(input.country) ? inputArguments.country : (isnull(lookup(countryLookup).get([input.country])) ? inputArguments.country : lookup(countryLookup).get([input.country]).wdayCountry));]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; countryRegionReference 'ID'" guiX="460" guiY="1220" id="FOREACH_ACCOUNT_ID5" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = "Country_Region_ID";
+output.value = (isnull(input.state) ? inputArguments.state : (isnull(lookup(stateLookup).get([input.state])) ? null : lookup(stateLookup).get([input.state]).wdayState));]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; phoneData/usageData/TypeData/typeReference 'ID'" guiX="460" guiY="1320" id="FOREACH_ACCOUNT_ID6" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = "Communication_Usage_Type_ID";
+output.value = "HOME";]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; phoneDeviceTypeReference 'ID'" guiX="460" guiY="1620" id="FOREACH_ACCOUNT_ID7" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.type = "Phone_Device_Type_ID";
+output.value = "1063.5";
+]]></attr>
+</Node>
 <Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'Prospect'" guiX="460" guiY="20" id="FOREACH_ACCOUNT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
 <attr name="melScript"><![CDATA[//MEL
 //START -> DO NOT REMOVE
@@ -795,6 +993,14 @@ output.__id = input.__id;
 output.prospectName = input.Name;
 output.prospectID = input.Id;
 ]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'phoneData'" guiX="460" guiY="1720" id="FOREACH_ACCOUNT_PHONE_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.phoneNumber = isnull(input.Phone) ? inputArguments.phone : input.Phone;]]></attr>
 </Node>
 <Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'typeData'" guiX="460" guiY="320" id="FOREACH_ACCOUNT_TYPE_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
 <attr name="melScript"><![CDATA[if(!isnull(input.Website)){
@@ -805,6 +1011,38 @@ output.__parent_id = input.__id;
 //END -> DO NOT REMOVE
 output.primary = true;
 }]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'addressLineData' typeData" guiX="460" guiY="1020" id="FOREACH_ACCOUNT_TYPE_DATA1" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.primary = 1;]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; phoneData/usageData 'typeData'" guiX="460" guiY="1420" id="FOREACH_ACCOUNT_TYPE_DATA2" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.primary = 1;]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; addressData 'usageData'" guiX="460" guiY="920" id="FOREACH_ACCOUNT_USAGE_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.public = 0;]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'Account' -&gt; phoneData 'usageData'" guiX="460" guiY="1520" id="FOREACH_ACCOUNT_USAGE_DATA1" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__id;
+//END -> DO NOT REMOVE
+output.public = 1;]]></attr>
 </Node>
 <Node enabled="enabled" guiName="Foreach 'Account' -&gt; 'webAddressData'" guiX="460" guiY="220" id="FOREACH_ACCOUNT_WEB_ADDRESS_DATA" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
 <attr name="melScript"><![CDATA[if(!isnull(input.Website)){
@@ -820,11 +1058,23 @@ output.webAddress = (input.Website.startsWith("http://") || input.Website.starts
 </Node>
 <Node enabled="enabled" guiName="Duplicate Account" guiX="240" guiY="20" id="SIMPLE_COPY0" type="SIMPLE_COPY"/>
 <Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 0 (out)" toNode="SIMPLE_COPY0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ADDRESS_DATA:0" guiBendpoints="" id="Edge14" inPort="Port 6 (in)" metadata="b3f8ae98-ce74-48c6-a657-e09c4c14ba9f" outPort="Port 0 (out)" toNode="BEAN_WRITER0:6"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ADDRESS_LINE_DATA:0" guiBendpoints="" id="Edge16" inPort="Port 7 (in)" metadata="9d9f867b-a9a9-4908-a9b9-d5e27ac91563" outPort="Port 0 (out)" toNode="BEAN_WRITER0:7"/>
 <Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID:0" guiBendpoints="" id="Edge4" inPort="Port 1 (in)" metadata="699b9430-2d37-4243-a521-59044809bd75" outPort="Port 0 (out)" toNode="BEAN_WRITER0:1"/>
 <Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID1:0" guiBendpoints="" id="Edge10" inPort="Port 4 (in)" metadata="e4f4a9f0-94e5-4a82-97fa-a7960129a161" outPort="Port 0 (out)" toNode="BEAN_WRITER0:4"/>
 <Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID2:0" guiBendpoints="" id="Edge12" inPort="Port 5 (in)" metadata="0cd16d3a-016e-4732-9077-ac68ac378549" outPort="Port 0 (out)" toNode="BEAN_WRITER0:5"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID3:0" guiBendpoints="" id="Edge18" inPort="Port 8 (in)" metadata="bf264a10-8f8f-487d-958f-67713bbcef3f" outPort="Port 0 (out)" toNode="BEAN_WRITER0:8"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID4:0" guiBendpoints="" id="Edge24" inPort="Port 11 (in)" metadata="fb16407c-e2f5-4f07-a850-ce6d8be1416c" outPort="Port 0 (out)" toNode="BEAN_WRITER0:11"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID5:0" guiBendpoints="" id="Edge26" inPort="Port 12 (in)" metadata="faa6a3bf-2e3c-45cb-88db-9226a6c2c18d" outPort="Port 0 (out)" toNode="BEAN_WRITER0:12"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID6:0" guiBendpoints="" id="Edge28" inPort="Port 13 (in)" metadata="f0825c7a-0578-4ec6-aa4d-c47057166360" outPort="Port 0 (out)" toNode="BEAN_WRITER0:13"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_ID7:0" guiBendpoints="" id="Edge34" inPort="Port 16 (in)" metadata="754c5a2c-5622-40ef-be50-5c1a9574b202" outPort="Port 0 (out)" toNode="BEAN_WRITER0:16"/>
 <Edge debugMode="true" fromNode="FOREACH_ACCOUNT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="421cdda8-babc-4329-affb-e823678cf0d5" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_PHONE_DATA:0" guiBendpoints="" id="Edge36" inPort="Port 17 (in)" metadata="7596fc24-adf2-4a05-a5eb-265c4be61421" outPort="Port 0 (out)" toNode="BEAN_WRITER0:17"/>
 <Edge debugMode="true" fromNode="FOREACH_ACCOUNT_TYPE_DATA:0" guiBendpoints="" id="Edge8" inPort="Port 3 (in)" metadata="bb70a565-3943-4f8f-9feb-a421e3128ba7" outPort="Port 0 (out)" toNode="BEAN_WRITER0:3"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_TYPE_DATA1:0" guiBendpoints="" id="Edge22" inPort="Port 10 (in)" metadata="d429e417-e6fb-4519-8ed6-942fabde2986" outPort="Port 0 (out)" toNode="BEAN_WRITER0:10"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_TYPE_DATA2:0" guiBendpoints="" id="Edge30" inPort="Port 14 (in)" metadata="1dff9570-0d1a-4f54-8ac7-bc3e3681bc32" outPort="Port 0 (out)" toNode="BEAN_WRITER0:14"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_USAGE_DATA:0" guiBendpoints="" id="Edge20" inPort="Port 9 (in)" metadata="cabb9d00-baa8-4516-aac8-c5f5e5b5b081" outPort="Port 0 (out)" toNode="BEAN_WRITER0:9"/>
+<Edge debugMode="true" fromNode="FOREACH_ACCOUNT_USAGE_DATA1:0" guiBendpoints="" id="Edge32" inPort="Port 15 (in)" metadata="e41c627d-f974-4261-96a8-dbf791fa1c9b" outPort="Port 0 (out)" toNode="BEAN_WRITER0:15"/>
 <Edge debugMode="true" fromNode="FOREACH_ACCOUNT_WEB_ADDRESS_DATA:0" guiBendpoints="" id="Edge6" inPort="Port 2 (in)" metadata="d6dbcff3-feb8-4857-afdc-200386a95f63" outPort="Port 0 (out)" toNode="BEAN_WRITER0:2"/>
 <Edge debugMode="true" fromNode="SIMPLE_COPY0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 0 (out)" toNode="FOREACH_ACCOUNT_OBJECT:0"/>
 <Edge debugMode="true" fromNode="SIMPLE_COPY0:1" guiBendpoints="" id="Edge3" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 1 (out)" toNode="FOREACH_ACCOUNT_ID:0"/>
@@ -832,5 +1082,17 @@ output.webAddress = (input.Website.startsWith("http://") || input.Website.starts
 <Edge debugMode="true" fromNode="SIMPLE_COPY0:3" guiBendpoints="" id="Edge7" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 3 (out)" toNode="FOREACH_ACCOUNT_TYPE_DATA:0"/>
 <Edge debugMode="true" fromNode="SIMPLE_COPY0:4" guiBendpoints="" id="Edge9" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 4 (out)" toNode="FOREACH_ACCOUNT_ID1:0"/>
 <Edge debugMode="true" fromNode="SIMPLE_COPY0:5" guiBendpoints="" id="Edge11" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 5 (out)" toNode="FOREACH_ACCOUNT_ID2:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:6" guiBendpoints="" id="Edge13" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 6 (out)" toNode="FOREACH_ACCOUNT_ADDRESS_DATA:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:7" guiBendpoints="" id="Edge15" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 7 (out)" toNode="FOREACH_ACCOUNT_ADDRESS_LINE_DATA:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:8" guiBendpoints="" id="Edge17" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 8 (out)" toNode="FOREACH_ACCOUNT_ID3:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:9" guiBendpoints="" id="Edge19" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 9 (out)" toNode="FOREACH_ACCOUNT_USAGE_DATA:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:10" guiBendpoints="" id="Edge21" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 10 (out)" toNode="FOREACH_ACCOUNT_TYPE_DATA1:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:11" guiBendpoints="" id="Edge23" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 11 (out)" toNode="FOREACH_ACCOUNT_ID4:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:12" guiBendpoints="" id="Edge25" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 12 (out)" toNode="FOREACH_ACCOUNT_ID5:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:13" guiBendpoints="" id="Edge27" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 13 (out)" toNode="FOREACH_ACCOUNT_ID6:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:14" guiBendpoints="" id="Edge29" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 14 (out)" toNode="FOREACH_ACCOUNT_TYPE_DATA2:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:15" guiBendpoints="" id="Edge31" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 15 (out)" toNode="FOREACH_ACCOUNT_USAGE_DATA1:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:16" guiBendpoints="" id="Edge33" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 16 (out)" toNode="FOREACH_ACCOUNT_ID7:0"/>
+<Edge debugMode="true" fromNode="SIMPLE_COPY0:17" guiBendpoints="" id="Edge35" inPort="Port 0 (in)" metadata="214b9298-678c-465a-91ed-4de108a249db" outPort="Port 17 (out)" toNode="FOREACH_ACCOUNT_PHONE_DATA:0"/>
 </Phase>
 </Graph>

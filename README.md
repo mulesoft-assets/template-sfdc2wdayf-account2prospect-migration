@@ -171,6 +171,13 @@ In order to use this Mule Anypoint Template you need to configure properties (Cr
 + wdayf.password `wdayf_password`
 + wdayf.endpoint `https://{your Workday domain}/ccx/service/{your tenant name}/Revenue_Management/v23.2`
 
++ wdayf.country `USA`
++ wdayf.state `USA-CA`
++ wdayf.postalCode `90001`
++ wdayf.city `San Francisco`
++ wdayf.street `Main Street 123`
++ wdayf.phone `123-4567`
+
 **SMTP Services configuration**
 
 smtp.host `smtp.gmail.com`

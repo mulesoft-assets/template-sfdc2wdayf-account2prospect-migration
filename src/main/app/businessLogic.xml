@@ -6,7 +6,7 @@
 	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
 	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:json="http://www.mulesoft.org/schema/mule/json"
-	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.6.1"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.6.2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -48,6 +48,12 @@ WHERE Type = 'Prospect'"
 					<data-mapper:input-arguments>
 						<data-mapper:input-argument key="extSourceIDType">External_Source_Code</data-mapper:input-argument>
 						<data-mapper:input-argument key="extSourceID">SFDC</data-mapper:input-argument>
+                        <data-mapper:input-argument key="city">${wdayf.city}</data-mapper:input-argument>
+                        <data-mapper:input-argument key="postalCode">${wdayf.postalCode}</data-mapper:input-argument>
+                        <data-mapper:input-argument key="street">${wdayf.street}</data-mapper:input-argument>
+                        <data-mapper:input-argument key="country">${wdayf.country}</data-mapper:input-argument>
+                        <data-mapper:input-argument key="state">${wdayf.state}</data-mapper:input-argument>
+                        <data-mapper:input-argument key="phone">${wdayf.phone}</data-mapper:input-argument>
 					</data-mapper:input-arguments>
 				</data-mapper:transform>
 				<expression-component doc:name="Prepare for upsert"><![CDATA[if (recordVars['wdayfProspect'].responseResults.totalResults == 0) {

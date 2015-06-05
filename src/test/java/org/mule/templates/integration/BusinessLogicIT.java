@@ -84,6 +84,7 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 				.with("Id", SFDC_TEST_ACCOUNT_ID)
 				.with("Name", name)
 				.with("Website", website)
+				.with("BillingPostalCode", "90210")
 				.build();
 		List<Map<String, Object>> payload = new ArrayList<>();
 		payload.add(account);
@@ -135,6 +136,10 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 		assertEquals("The name should be the same", response.getResponseData().getProspect().get(0).getProspectData().getProspectName(), name);
 		assertEquals("The website should be the same", response.getResponseData().getProspect().get(0).getProspectData().getContactData()
 				.getWebAddressData().get(0).getWebAddress(), website);
+		assertEquals("The phone should be the same", response.getResponseData().getProspect().get(0).getProspectData()
+				.getContactData().getPhoneData().get(0).getPhoneNumber(), "123-4567");
+		assertEquals("The postal code should be the same", response.getResponseData().getProspect().get(0).getProspectData()
+				.getContactData().getAddressData().get(0).getPostalCode(), "90210");		
 	}
 
 	/**
