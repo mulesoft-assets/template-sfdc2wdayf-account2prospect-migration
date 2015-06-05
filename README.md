@@ -5,6 +5,7 @@
 + [Use Case](#usecase)
 + [Considerations](#considerations)
 	* [Salesforce Considerations](#salesforceconsiderations)
+	* [Workday Considerations](#workdayconsiderations)
 	* [Workday Financials Considerations](#workdayfinancialsconsiderations)
 + [Run it!](#runit)
 	* [Running on premise](#runonopremise)
@@ -85,7 +86,12 @@ column='486'
 
 
 
+## Workday Considerations <a name="workdayconsiderations"/>
 
+
+### As destination of data
+
+There are no particular considerations for this Anypoint Template regarding Workday as data destination.
 
 
 
