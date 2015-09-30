@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
+<mule version="EE-3.7.2"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" 
 	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue"
-	xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
-	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:json="http://www.mulesoft.org/schema/mule/json"
-	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.6.2"
+	xmlns:core="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:batch="http://www.mulesoft.org/schema/mule/batch" 
+	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" 
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -16,79 +21,74 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
 http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
 http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mule/wd-revenue/current/mule-wd-revenue.xsd
-http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
-	<data-mapper:config name="Map_To_PutProspectRequestType"
-		transformationGraphPath="map_to_putprospectrequesttype.grf" doc:name="Map_To_PutProspectRequestType" />
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
 
 	<batch:job name="migrateProspectAccountsBatch">
 		<batch:threading-profile poolExhaustedAction="WAIT" />
 		<batch:input>
 			<sfdc:query config-ref="Salesforce"
-				query="dsql:SELECT BillingAddress,Description,Id,Industry,Name,Phone,Type,Website 
+				query="dsql:SELECT BillingStreet,BillingCity,BillingPostalCode,BillingState,BillingCountry,Description,Id,Industry,Name,Phone,Type,Website 
 FROM Account 
 WHERE Type = 'Prospect'"
 				fetchSize="${page.size}" doc:name="query Prospect Accounts from Salesforce" />
 		</batch:input>
 		<batch:process-records>
 			<batch:step name="getProspectInWorkdayStep">
-				<enricher doc:name="store in recordVar 'wdayfProspect'"
-					source="#[payload]" target="#[recordVars['wdayfProspect']]">
+				<enricher doc:name="store in recordVar 'wdayfProspectReferenceId'"
+					source="#[payload.referenceId]" target="#[recordVars.wdayfProspectReferenceId]">
 					<processor-chain doc:name="Get existing">
+                        <dw:transform-message doc:name="Create GetProspects Request">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	requestCriteria: {
+		prospectID: payload.Id,
+		prospectName: null
+	},
+	responseGroup: {
+		includeProspectData: true,
+		includeReference: true
+	}
+} as :object { class : "com.workday.revenue.GetProspectsRequestType" }]]></dw:set-payload>
+                        </dw:transform-message>
 						<wd-revenue:get-prospects config-ref="Workday_Revenue_Management"
-							getProspectsRequest-ref="#[org.mule.templates.ProspectRequest.createByID(payload['Id'])]"
+							
 							doc:name="getProspect By Id" />
+                        <dw:transform-message doc:name="Extract referenceId">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{ referenceId : payload.responseData.prospect[0].prospectData.prospectID }
+when payload.responseResults.totalResults != 0 otherwise null]]></dw:set-payload>
+                        </dw:transform-message>
 					</processor-chain>
 				</enricher>
 			</batch:step>
 			<batch:step name="upsertProspect">
-				<logger message="Upserting Prospect..." level="INFO"
-					doc:name="Upsert" />
-				<data-mapper:transform config-ref="Map_To_PutProspectRequestType"
-					doc:name="Map To PutProspectRequestType">
-					<data-mapper:input-arguments>
-						<data-mapper:input-argument key="extSourceIDType">External_Source_Code</data-mapper:input-argument>
-						<data-mapper:input-argument key="extSourceID">SFDC</data-mapper:input-argument>
-                        <data-mapper:input-argument key="city">${wdayf.city}</data-mapper:input-argument>
-                        <data-mapper:input-argument key="postalCode">${wdayf.postalCode}</data-mapper:input-argument>
-                        <data-mapper:input-argument key="street">${wdayf.street}</data-mapper:input-argument>
-                        <data-mapper:input-argument key="country">${wdayf.country}</data-mapper:input-argument>
-                        <data-mapper:input-argument key="state">${wdayf.state}</data-mapper:input-argument>
-                        <data-mapper:input-argument key="phone">${wdayf.phone}</data-mapper:input-argument>
-					</data-mapper:input-arguments>
-				</data-mapper:transform>
-				<expression-component doc:name="Prepare for upsert"><![CDATA[if (recordVars['wdayfProspect'].responseResults.totalResults == 0) {
-	// Remove ID type as it is an insert
-	payload.prospectReference = null;
-} else {
-	// Add target system ID value as it is an update
-	payload.prospectReference.ID[0].value = recordVars['wdayfProspect'].responseData.prospect[0].prospectData.prospectID;
-}
-]]></expression-component>
-				<wd-revenue:put-prospect config-ref="Workday_Revenue_Management"
-					doc:name="Upsert Prospect" />
-				<json:object-to-json-transformer
-					doc:name="Object to JSON" />
-				<logger message="Upsert Prospect response data: #[payload]"
-					level="INFO" doc:name="Logger" />
+                <logger message="wdayfProspectReferenceId: #[recordVars.wdayfProspectReferenceId]" level="INFO" doc:name="Logger"/>
+				<logger message="Upserting Prospect #[payload]" level="INFO" doc:name="Upsert" />
+                <dw:transform-message doc:name="Map to PutProspectRequestType">
+                    <dw:set-payload resource="classpath:mapToPutProspectRequestType.dwl"></dw:set-payload>
+                </dw:transform-message>
+
+				<wd-revenue:put-prospect config-ref="Workday_Revenue_Management" doc:name="Upsert Prospect" />
+				<json:object-to-json-transformer doc:name="Object to JSON" />
+				<logger message="Upsert Prospect response data: #[payload]"	level="INFO" doc:name="Logger" />
 			</batch:step>
 		</batch:process-records>
 		<batch:on-complete>
-			<scatter-gather doc:name="All">
-				<processor-chain>
-					<json:object-to-json-transformer
-						doc:name="transform BatchJobInstance to JSON" />
-					<logger message="Migration process has finished: #[payload]"
-						level="INFO" doc:name="log 'Migration process has finished'" />
-				</processor-chain>
-				<processor-chain>
-					<parse-template location="./src/main/resources/email/body.html"
-						doc:name="Parse Template" />
-					<smtp:outbound-endpoint host="${smtp.host}"
-						port="${smtp.port}" user="${smtp.user}" password="${smtp.password}"
-						connector-ref="gmailConnector" to="${mail.to}" from="${mail.from}"
-						subject="${mail.subject}" responseTimeout="10000" doc:name="send mail" />
-				</processor-chain>
-			</scatter-gather>
+            <scatter-gather doc:name="All">
+                <processor-chain>
+                    <json:object-to-json-transformer doc:name="transform BatchJobInstance to JSON"/>
+                    <logger message="Migration process has finished: #[payload]" level="INFO" doc:name="log 'Migration process has finished'"/>
+                </processor-chain>
+                <processor-chain>
+                    <parse-template location="./src/main/resources/email/body.html" doc:name="Parse Template"/>
+                    <smtp:outbound-endpoint host="${smtp.host}" port="${smtp.port}" user="${smtp.user}" password="${smtp.password}" connector-ref="gmailConnector" to="${mail.to}" from="${mail.from}" subject="${mail.subject}" responseTimeout="10000" doc:name="send mail"/>
+                </processor-chain>
+            </scatter-gather>
+
 		</batch:on-complete>
 	</batch:job>
 
@@ -100,7 +100,6 @@ This flow should control the direction of the application, and it should be call
 ">
 		<batch:execute name="migrateProspectAccountsBatch" doc:name="Batch Execute" />
 		<exception-strategy ref="defaultChoiceExceptionStrategy" doc:name="Reference Exception Strategy" />
-
 	</flow>
 
 </mule>

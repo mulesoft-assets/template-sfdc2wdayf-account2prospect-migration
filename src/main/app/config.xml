@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue" xmlns:wd-financial="http://www.mulesoft.org/schema/mule/wd-revenue"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" version="EE-3.6.2"
+<mule version="EE-3.7.2"
+	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue" 
+	xmlns:wd-financial="http://www.mulesoft.org/schema/mule/wd-revenue"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" 
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -38,7 +43,7 @@ http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mu
 
 	<wd-revenue:config name="Workday_Revenue_Management"
 		revenueUser="${wdayf.user}" revenuePassword="${wdayf.password}"
-		revenueEndpoint="${wdayf.endpoint}" doc:name="Workday Revenue Management">
+		revenueEndpoint="${wdayf.endpoint}" doc:name="Workday Revenue Management" revenueWsdlLocation="https://community.workday.com/custom/developer/API/Revenue_Management/v23.2/Revenue_Management.wsdl">
 		<wd-revenue:connection-pooling-profile
 			initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" />
 	</wd-revenue:config>

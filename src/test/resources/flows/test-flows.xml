@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue" 
-xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" 
-xmlns="http://www.mulesoft.org/schema/mule/core" 
-xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
-xmlns:spring="http://www.springframework.org/schema/beans" 
-version="EE-3.6.2" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+<mule version="EE-3.7.2"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"  
+	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue" 
+	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" 
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
-http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mule/wd-revenue/current/mule-wd-revenue.xsd">
+http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mule/wd-revenue/current/mule-wd-revenue.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
     <sub-flow name="retrieveProspectFlow">
+        <dw:transform-message doc:name="Create GetProspects Request">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	requestCriteria: {
+		prospectID: payload,
+		prospectName: null
+	},
+	responseGroup: {
+		includeProspectData: true,
+		includeReference: true
+	}
+} as :object { class : "com.workday.revenue.GetProspectsRequestType" }]]></dw:set-payload>
+        </dw:transform-message>
         <wd-revenue:get-prospects config-ref="Workday_Revenue_Management"  doc:name="Workday Revenue Management"/>
+        <dw:transform-message doc:name="POJO to Map">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload.responseData.prospect map {
+	Name       : $.prospectData.prospectName,
+	Website    : $.prospectData.contactData.webAddressData[0].webAddress,
+	Phone      : $.prospectData.contactData.phoneData[0].phoneNumber,
+	PostalCode : $.prospectData.contactData.addressData[0].postalCode
+} when payload.responseData.prospect != null otherwise []]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="Workday retrieved data: #[payload]" level="INFO" doc:name="Logger"/>
     </sub-flow>
     <sub-flow name="updateAccountFlow">
+        <logger message="Updating Salesforce account: #[payload]" level="INFO" doc:name="Logger"/>
         <sfdc:update config-ref="Salesforce" type="Account" doc:name="Salesforce">
             <sfdc:objects ref="#[payload]"/>
         </sfdc:update>
+        <logger message="SFDC account update response: #[payload]" level="INFO" doc:name="Logger"/>
     </sub-flow>
 
 </mule>

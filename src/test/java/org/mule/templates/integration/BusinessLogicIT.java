@@ -6,7 +6,7 @@
 
 package org.mule.templates.integration;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -22,12 +22,9 @@ import org.mule.api.MuleEvent;
 import org.mule.api.lifecycle.InitialisationException;
 import org.mule.processor.chain.SubflowInterceptingChainLifecycleWrapper;
 import org.mule.tck.junit4.rule.DynamicPort;
-import org.mule.templates.ProspectRequest;
 import org.mule.templates.builders.SfdcObjectBuilder;
 
 import com.mulesoft.module.batch.BatchTestHelper;
-import com.workday.revenue.GetProspectsRequestType;
-import com.workday.revenue.GetProspectsResponseType;
 
 /**
  * The objective of this class is to validate the correct behavior of the Mule
@@ -113,6 +110,7 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testMainFlow() throws Exception {
 		// edit test data
@@ -126,20 +124,15 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 		helper.assertJobWasSuccessful();
 
 		// get updated prospect from Workday
-		GetProspectsRequestType request = ProspectRequest.createByID(SFDC_TEST_ACCOUNT_ID);
-
-		MuleEvent event = retrieveProspectFromWorkdayFlow.process(getTestEvent(request, MessageExchangePattern.REQUEST_RESPONSE));
-		GetProspectsResponseType response = (GetProspectsResponseType) event.getMessage().getPayload();
+		MuleEvent event = retrieveProspectFromWorkdayFlow.process(getTestEvent(SFDC_TEST_ACCOUNT_ID, MessageExchangePattern.REQUEST_RESPONSE));
+		List<Map<String, String>> response = (List<Map<String, String>>) event.getMessage().getPayload();
 
 		// assertions
-		assertEquals("Workday should return one result", 1, response.getResponseResults().getTotalResults().intValue());
-		assertEquals("The name should be the same", response.getResponseData().getProspect().get(0).getProspectData().getProspectName(), name);
-		assertEquals("The website should be the same", response.getResponseData().getProspect().get(0).getProspectData().getContactData()
-				.getWebAddressData().get(0).getWebAddress(), website);
-		assertEquals("The phone should be the same", response.getResponseData().getProspect().get(0).getProspectData()
-				.getContactData().getPhoneData().get(0).getPhoneNumber(), "123-4567");
-		assertEquals("The postal code should be the same", response.getResponseData().getProspect().get(0).getProspectData()
-				.getContactData().getAddressData().get(0).getPostalCode(), "90210");		
+		assertEquals("Workday should return one result", 1, response.size());
+		assertEquals("The name should be the same", response.get(0).get("Name"), name);
+		assertEquals("The website should be the same", response.get(0).get("Website"), website);
+		assertEquals("The phone should be the same", response.get(0).get("Phone"), "123-4567");
+		assertEquals("The postal code should be the same", response.get(0).get("PostalCode"), "90210");		
 	}
 
 	/**
