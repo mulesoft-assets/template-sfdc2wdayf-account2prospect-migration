@@ -34,7 +34,7 @@ WHERE Type = 'Prospect'"
 		</batch:input>
 		<batch:process-records>
 			<batch:step name="getProspectInWorkdayStep">
-				<enricher doc:name="Enrich payload with 'wdayfProspectReferenceId'"
+				<enricher doc:name="Enrich payload with 'wdayfReferenceId'"
 					source="#[payload.referenceId]" target="#[payload.wdayfReferenceId]">
 					<processor-chain doc:name="Get existing">
                         <dw:transform-message doc:name="Create GetProspects Request">
