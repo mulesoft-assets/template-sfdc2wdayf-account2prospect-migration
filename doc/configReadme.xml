@@ -46,6 +46,7 @@ Once your app is all set and started, supposing you choose as domain name `sfdca
 **Application configuration**
 
 + http.port `9090` 
++ page.size `200`
 
 **Salesforce Connector configuration**
 
