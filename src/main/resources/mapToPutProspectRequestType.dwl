@@ -132,8 +132,8 @@
         "descriptor": null,
         "ID": [{
                 "type": "Prospect_Reference_ID",
-                "value": recordVars.wdayfProspectReferenceId
+                "value": payload.wdayfReferenceId
             }]
-    } unless recordVars.wdayfProspectReferenceId == null otherwise null,
+    } unless payload.wdayfReferenceId == null otherwise null,
     "version": null
 } as :object {class: "com.workday.revenue.PutProspectRequestType"}

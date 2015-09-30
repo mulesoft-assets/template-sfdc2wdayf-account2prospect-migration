@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule version="EE-3.7.2"
+<mule 
 	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" 
 	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue"
 	xmlns:core="http://www.mulesoft.org/schema/mule/core" 
@@ -34,8 +34,8 @@ WHERE Type = 'Prospect'"
 		</batch:input>
 		<batch:process-records>
 			<batch:step name="getProspectInWorkdayStep">
-				<enricher doc:name="store in recordVar 'wdayfProspectReferenceId'"
-					source="#[payload.referenceId]" target="#[recordVars.wdayfProspectReferenceId]">
+				<enricher doc:name="Enrich payload with 'wdayfReferenceId'"
+					source="#[payload.referenceId]" target="#[payload.wdayfReferenceId]">
 					<processor-chain doc:name="Get existing">
                         <dw:transform-message doc:name="Create GetProspects Request">
                             <dw:set-payload><![CDATA[%dw 1.0
@@ -66,8 +66,7 @@ when payload.responseResults.totalResults != 0 otherwise null]]></dw:set-payload
 				</enricher>
 			</batch:step>
 			<batch:step name="upsertProspect">
-                <logger message="wdayfProspectReferenceId: #[recordVars.wdayfProspectReferenceId]" level="INFO" doc:name="Logger"/>
-				<logger message="Upserting Prospect #[payload]" level="INFO" doc:name="Upsert" />
+				<logger message="Upserting Prospect #[payload]" level="INFO" doc:name="Log upsert operation" />
                 <dw:transform-message doc:name="Map to PutProspectRequestType">
                     <dw:set-payload resource="classpath:mapToPutProspectRequestType.dwl"></dw:set-payload>
                 </dw:transform-message>
