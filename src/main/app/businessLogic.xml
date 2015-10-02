@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule 
+<mule version="EE-3.7.2"
 	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" 
 	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue"
 	xmlns:core="http://www.mulesoft.org/schema/mule/core" 
@@ -65,7 +65,7 @@ when payload.responseResults.totalResults != 0 otherwise null]]></dw:set-payload
 					</processor-chain>
 				</enricher>
 			</batch:step>
-			<batch:step name="upsertProspect">
+			<batch:step name="upsertProspectStep">
 				<logger message="Upserting Prospect #[payload]" level="INFO" doc:name="Log upsert operation" />
                 <dw:transform-message doc:name="Map to PutProspectRequestType">
                     <dw:set-payload resource="classpath:mapToPutProspectRequestType.dwl"></dw:set-payload>
