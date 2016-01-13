@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule version="EE-3.7.2"
+<mule 
 	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" 
 	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue"
 	xmlns:core="http://www.mulesoft.org/schema/mule/core" 
@@ -83,7 +83,7 @@ when payload.responseResults.totalResults != 0 otherwise null]]></dw:set-payload
                     <logger message="Migration process has finished: #[payload]" level="INFO" doc:name="log 'Migration process has finished'"/>
                 </processor-chain>
                 <processor-chain>
-                    <parse-template location="./src/main/resources/email/body.html" doc:name="Parse Template"/>
+                    <parse-template location="email/body.html" doc:name="Parse Template"/>
                     <smtp:outbound-endpoint host="${smtp.host}" port="${smtp.port}" user="${smtp.user}" password="${smtp.password}" connector-ref="gmailConnector" to="${mail.to}" from="${mail.from}" subject="${mail.subject}" responseTimeout="10000" doc:name="send mail"/>
                 </processor-chain>
             </scatter-gather>
