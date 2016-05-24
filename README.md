@@ -102,6 +102,7 @@ There are no particular considerations for this Anypoint Template regarding Work
 ### As destination of data
 
 There are no particular considerations for this Anypoint Template regarding Workday Financials as data destination.
+
 # Run it! <a name="runit"/>
 Simple steps to get Salesforce to Workday Account-Prospect Migration running.
 In any of the ways you would like to run this Template this is an example of the output you'll see after hitting the HTTP endpoint:
@@ -176,7 +177,8 @@ In order to use this Mule Anypoint Template you need to configure properties (Cr
 
 + wdayf.user `wdayf_user`
 + wdayf.password `wdayf_password`
-+ wdayf.endpoint `https://{your Workday domain}/ccx/service/{your tenant name}/Revenue_Management/v23.2`
++ wdayf.tenant `wdayf_tenant`
++ wdayf.hostname `{your Workday domain}.workday.com`
 
 + wdayf.country `USA`
 + wdayf.state `USA-CA`

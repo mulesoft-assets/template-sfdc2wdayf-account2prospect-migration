@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule 
-	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" 
-	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue"
+<mule xmlns:wd-connector="http://www.mulesoft.org/schema/mule/wd-connector" 
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
 	xmlns:core="http://www.mulesoft.org/schema/mule/core" 
 	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
 	xmlns="http://www.mulesoft.org/schema/mule/core" 
@@ -20,8 +19,8 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
 http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
-http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mule/wd-revenue/current/mule-wd-revenue.xsd
-http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/wd-connector http://www.mulesoft.org/schema/mule/wd-connector/current/mule-wd-connector.xsd">
 
 	<batch:job name="migrateProspectAccountsBatch">
 		<batch:threading-profile poolExhaustedAction="WAIT" />
@@ -37,42 +36,110 @@ WHERE Type = 'Prospect'"
 				<enricher doc:name="Enrich payload with 'wdayfReferenceId'"
 					source="#[payload.referenceId]" target="#[payload.wdayfReferenceId]">
 					<processor-chain doc:name="Get existing">
-                        <dw:transform-message doc:name="Create GetProspects Request">
+                        <dw:transform-message doc:name="Create GetProspectsRequest">
                             <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
+%output application/xml
+%namespace ns0 urn:com.workday/bsvc
 ---
 {
-	requestCriteria: {
-		prospectID: payload.Id,
-		prospectName: null
-	},
-	responseGroup: {
-		includeProspectData: true,
-		includeReference: true
+	ns0#Get_Prospects_Request: {
+		ns0#Request_Criteria: {
+			ns0#Prospect_ID: payload.Id
+		},
+		ns0#Response_Group: {
+			ns0#Include_Reference: true,
+			ns0#Include_Prospect_Data: true
+		}
 	}
-} as :object { class : "com.workday.revenue.GetProspectsRequestType" }]]></dw:set-payload>
+}]]></dw:set-payload>
                         </dw:transform-message>
-						<wd-revenue:get-prospects config-ref="Workday_Revenue_Management"
-							
-							doc:name="getProspect By Id" />
-                        <dw:transform-message doc:name="Extract referenceId">
+                        <wd-connector:invoke config-ref="Workday_Basic" type="Revenue_Management||Get_Prospects" doc:name="Get Prospects from Workday"/>
+                        <dw:transform-message doc:name="Extract refenrenceId">
                             <dw:set-payload><![CDATA[%dw 1.0
 %output application/java
+%namespace ns0 urn:com.workday/bsvc
 ---
-{ referenceId : payload.responseData.prospect[0].prospectData.prospectID }
-when payload.responseResults.totalResults != 0 otherwise null]]></dw:set-payload>
+{ referenceId : payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect[0].ns0#Prospect_Data.ns0#Prospect_ID
+}
+when (payload.ns0#Get_Prospects_Response.ns0#Response_Results.ns0#Total_Results != 0) otherwise null]]></dw:set-payload>
                         </dw:transform-message>
 					</processor-chain>
 				</enricher>
 			</batch:step>
 			<batch:step name="upsertProspectStep">
 				<logger message="Upserting Prospect #[payload]" level="INFO" doc:name="Log upsert operation" />
-                <dw:transform-message doc:name="Map to PutProspectRequestType">
-                    <dw:set-payload resource="classpath:mapToPutProspectRequestType.dwl"></dw:set-payload>
+                <dw:transform-message doc:name="Map to PutProspectRequest">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%function countryLookup(sfdcCountry) {
+	(country: 'USA') when sfdcCountry == 'USA' // add new line like this for different countries
+} unless sfdcCountry is :null otherwise country: null
+%function stateLookup(sfdcState) {
+	(state: 'USA-CA') when sfdcState == 'CA' // add new line like this for different states
+} unless sfdcState is :null otherwise state: null
+%namespace ns0 urn:com.workday/bsvc
+---
+{
+	ns0#Put_Prospect_Request: {
+		(ns0#Prospect_Reference: {
+			ns0#ID @(ns0#type: "Prospect_Reference_ID"): payload.wdayfReferenceId
+		}) when payload.wdayfReferenceId != null,
+		ns0#Prospect_Data: {
+			ns0#Prospect_ID: payload.Id,
+			ns0#Prospect_Name: payload.Name,
+			ns0#Prospect_Source_Reference: {
+				ns0#ID @(ns0#type: "External_Source_Code"): "SFDC"
+			},
+			ns0#Contact_Data: {
+				ns0#Address_Data: {
+					ns0#Country_Reference: {
+						ns0#ID @(ns0#type: "ISO_3166-1_Alpha-3_Code"): countryLookup(payload.BillingCountry).country default p('wdayf.country')
+					},
+					ns0#Address_Line_Data @(ns0#Type: "ADDRESS_LINE_1"): payload.BillingStreet default p('wdayf.street'),
+					ns0#Municipality: payload.BillingCity default p('wdayf.city'),
+					ns0#Country_Region_Reference: {
+						ns0#ID @(ns0#type: "Country_Region_ID"): stateLookup(payload.BillingState).state default p('wdayf.state')
+					},
+					ns0#Postal_Code: payload.BillingPostalCode default p('wdayf.postalCode'),
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#type: "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				},
+				ns0#Phone_Data: {
+					ns0#Phone_Number: payload.Phone default p('wdayf.phone'),
+					ns0#Phone_Device_Type_Reference: {
+						ns0#ID @(ns0#type: "Phone_Device_Type_ID"): "1063.5"
+					},
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#type: "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				},
+				(ns0#Web_Address_Data: {
+					ns0#Web_Address: payload.Website when (payload.Website matches /http(s)?:\/\/.*/) 
+            	            otherwise "http://" ++ payload.Website,
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#type: "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				}) when payload.Website != null
+			}
+		}
+	}
+}]]></dw:set-payload>
                 </dw:transform-message>
+                <wd-connector:invoke config-ref="Workday_Basic" type="Revenue_Management||Put_Prospect" doc:name="Upsert Prospect in Workday"/>
 
-				<wd-revenue:put-prospect config-ref="Workday_Revenue_Management" doc:name="Upsert Prospect" />
-				<json:object-to-json-transformer doc:name="Object to JSON" />
 				<logger message="Upsert Prospect response data: #[payload]"	level="INFO" doc:name="Logger" />
 			</batch:step>
 		</batch:process-records>
@@ -90,6 +157,7 @@ when payload.responseResults.totalResults != 0 otherwise null]]></dw:set-payload
 
 		</batch:on-complete>
 	</batch:job>
+
 
 	<flow name="mainFlow" processingStrategy="synchronous"
 		doc:description="This flow is the entry point to the Template business logic.
