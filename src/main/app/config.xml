@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule version="EE-3.7.2"
+<mule xmlns:wd-connector="http://www.mulesoft.org/schema/mule/wd-connector"
+	
 	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue" 
 	xmlns:wd-financial="http://www.mulesoft.org/schema/mule/wd-revenue"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" 
@@ -11,7 +12,8 @@
 	xmlns:spring="http://www.springframework.org/schema/beans"
 	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/wd-connector http://www.mulesoft.org/schema/mule/wd-connector/current/mule-wd-connector.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
@@ -41,11 +43,7 @@ http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mu
 			initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" />
 	</sfdc:config>
 
-	<wd-revenue:config name="Workday_Revenue_Management"
-		revenueUser="${wdayf.user}" revenuePassword="${wdayf.password}"
-		revenueEndpoint="${wdayf.endpoint}" doc:name="Workday Revenue Management" revenueWsdlLocation="https://community.workday.com/custom/developer/API/Revenue_Management/v23.2/Revenue_Management.wsdl">
-		<wd-revenue:connection-pooling-profile
-			initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" />
-	</wd-revenue:config>
+	
+	<wd-connector:config name="Workday_Basic" username="${wdayf.user}" password="${wdayf.password}" tenantName="${wdayf.tenant}" hostName="${wdayf.hostname}" doc:name="Workday: Basic"/>
 
 </mule>

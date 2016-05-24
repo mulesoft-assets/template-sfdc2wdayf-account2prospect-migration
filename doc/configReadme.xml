@@ -59,7 +59,8 @@ Once your app is all set and started, supposing you choose as domain name `sfdca
 
 + wdayf.user `wdayf_user`
 + wdayf.password `wdayf_password`
-+ wdayf.endpoint `https://{your Workday domain}/ccx/service/{your tenant name}/Revenue_Management/v23.2`
++ wdayf.tenant `wdayf_tenant`
++ wdayf.hostname `{your Workday domain}.workday.com`
 
 + wdayf.country `USA`
 + wdayf.state `USA-CA`
