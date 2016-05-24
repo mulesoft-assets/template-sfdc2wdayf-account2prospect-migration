@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>org.mule.templates</groupId>
@@ -32,11 +33,11 @@
 							<groupId>org.mule.modules</groupId>
 							<artifactId>mule-module-sfdc</artifactId>
 						</inclusion>
-					<inclusion>
-                            <groupId>org.mule.modules</groupId>
-                            <artifactId>workday-connector</artifactId>
-                        </inclusion>
-                    </inclusions>
+						<inclusion>
+							<groupId>org.mule.modules</groupId>
+							<artifactId>workday-connector</artifactId>
+						</inclusion>
+					</inclusions>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -47,7 +48,7 @@
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-sfdc</artifactId>
 			<version>${sfdc.version}</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.muleesb.modules</groupId>
 			<artifactId>mule-module-batch-ee</artifactId>
@@ -78,12 +79,18 @@
 			<version>${mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
-    <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>workday-connector</artifactId>
-            <version>${wday.version}</version>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>workday-connector</artifactId>
+			<version>${wday.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-ws</artifactId>
+			<version>${mule.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<repositories>
 		<repository>
@@ -105,7 +112,7 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-<properties>
-        <mule.version>3.7.3</mule.version>
-    </properties>
+	<properties>
+		<mule.version>3.7.3</mule.version>
+	</properties>
 </project>
