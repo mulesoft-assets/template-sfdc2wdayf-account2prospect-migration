@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>org.mule.templates</groupId>
 		<artifactId>templates-tooling-parent-pom</artifactId>
-		<version>1.2.3</version>
+		<version>1.2.12</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>template-sfdc2wdayf-account2prospect-migration</artifactId>
 	<packaging>mule</packaging>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.2.2-SNAPSHOT</version>
 	<name>template-sfdc2wdayf-account2prospect-migration Anypoint Template Project</name>
 
 	<scm>
@@ -32,11 +32,11 @@
 							<groupId>org.mule.modules</groupId>
 							<artifactId>mule-module-sfdc</artifactId>
 						</inclusion>
-						<inclusion>
-							<groupId>org.mule.modules</groupId>
-							<artifactId>mule-module-workday-revenuemanagement</artifactId>
-						</inclusion>
-					</inclusions>
+					<inclusion>
+                            <groupId>org.mule.modules</groupId>
+                            <artifactId>workday-connector</artifactId>
+                        </inclusion>
+                    </inclusions>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -47,12 +47,7 @@
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-sfdc</artifactId>
 			<version>${sfdc.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-workday-revenuemanagement</artifactId>
-			<version>${wday.fin.version}</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>com.mulesoft.muleesb.modules</groupId>
 			<artifactId>mule-module-batch-ee</artifactId>
@@ -83,7 +78,12 @@
 			<version>${mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+    <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>workday-connector</artifactId>
+            <version>${wday.version}</version>
+        </dependency>
+    </dependencies>
 
 	<repositories>
 		<repository>
@@ -105,4 +105,7 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
+<properties>
+        <mule.version>3.7.3</mule.version>
+    </properties>
 </project>
