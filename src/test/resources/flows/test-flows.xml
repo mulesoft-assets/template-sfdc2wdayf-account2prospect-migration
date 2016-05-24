@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule version="EE-3.7.2"
+<mule xmlns:wd-connector="http://www.mulesoft.org/schema/mule/wd-connector" 
 	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"  
 	xmlns:wd-revenue="http://www.mulesoft.org/schema/mule/wd-revenue" 
 	xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" 
@@ -11,37 +11,42 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
 http://www.mulesoft.org/schema/mule/wd-revenue http://www.mulesoft.org/schema/mule/wd-revenue/current/mule-wd-revenue.xsd
-http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
-    <sub-flow name="retrieveProspectFlow">
-        <dw:transform-message doc:name="Create GetProspects Request">
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/wd-connector http://www.mulesoft.org/schema/mule/wd-connector/current/mule-wd-connector.xsd">
+    <flow name="retrieveProspectFlow">
+        <dw:transform-message doc:name="Prepare GetProspectsRequest">
             <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
+%output application/xml
+%namespace ns0 urn:com.workday/bsvc
 ---
 {
-	requestCriteria: {
-		prospectID: payload,
-		prospectName: null
-	},
-	responseGroup: {
-		includeProspectData: true,
-		includeReference: true
+	ns0#Get_Prospects_Request: {
+		ns0#Request_Criteria: {
+			ns0#Prospect_ID: payload
+		},
+		ns0#Response_Group: {
+			ns0#Include_Reference: true,
+			ns0#Include_Prospect_Data: true
+		}
 	}
-} as :object { class : "com.workday.revenue.GetProspectsRequestType" }]]></dw:set-payload>
+}]]></dw:set-payload>
         </dw:transform-message>
-        <wd-revenue:get-prospects config-ref="Workday_Revenue_Management"  doc:name="Workday Revenue Management"/>
-        <dw:transform-message doc:name="POJO to Map">
+        <wd-connector:invoke config-ref="Workday_Basic" type="Revenue_Management||Get_Prospects" doc:name="Get Prospects from Workday"/>
+
+        <dw:transform-message doc:name="XML response to Map">
             <dw:set-payload><![CDATA[%dw 1.0
 %output application/java
+%namespace ns0 urn:com.workday/bsvc
 ---
-payload.responseData.prospect map {
-	Name       : $.prospectData.prospectName,
-	Website    : $.prospectData.contactData.webAddressData[0].webAddress,
-	Phone      : $.prospectData.contactData.phoneData[0].phoneNumber,
-	PostalCode : $.prospectData.contactData.addressData[0].postalCode
-} when payload.responseData.prospect != null otherwise []]]></dw:set-payload>
+payload.ns0#Get_Prospects_Response.ns0#Response_Data.*ns0#Prospect map {
+	Name       : $.ns0#Prospect_Data.ns0#Prospect_Name,
+	Website    : $.ns0#Prospect_Data.ns0#Contact_Data.ns0#Web_Address_Data[0].ns0#Web_Address,
+	Phone      : $.ns0#Prospect_Data.ns0#Contact_Data.ns0#Phone_Data[0].ns0#Phone_Number,
+	PostalCode : $.ns0#Prospect_Data.ns0#Contact_Data.ns0#Address_Data.ns0#Postal_Code
+} when payload.ns0#Get_Prospects_Response.ns0#Response_Data.*ns0#Prospect != null otherwise []]]></dw:set-payload>
         </dw:transform-message>
         <logger message="Workday retrieved data: #[payload]" level="INFO" doc:name="Logger"/>
-    </sub-flow>
+    </flow>
     <sub-flow name="updateAccountFlow">
         <logger message="Updating Salesforce account: #[payload]" level="INFO" doc:name="Logger"/>
         <sfdc:update config-ref="Salesforce" type="Account" doc:name="Salesforce">
