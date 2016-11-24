@@ -74,7 +74,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.weave</groupId>
-			<artifactId>mule-plugin-weave_2.11</artifactId>
+			<artifactId>mule-plugin-weave</artifactId>
 			<version>${mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
