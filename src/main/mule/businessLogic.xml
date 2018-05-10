@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:workday="http://www.mulesoft.org/schema/mule/workday"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:batch="http://www.mulesoft.org/schema/mule/batch"
+	xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd">
+
+	<flow name="businessLogicFlow" doc:id="884f86c5-66e1-4701-bb9b-594c2a60abf3">
+		<salesforce:query doc:name="Select Accounts from SFDC"
+			doc:id="5de63d1d-1f78-4eec-8ed6-dd7cb05280da" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query>SELECT
+				BillingStreet,BillingCity,BillingPostalCode,BillingState,BillingCountry,Description,Id,Industry,Name,Phone,Type,Website
+				FROM Account
+				WHERE Type = 'Prospect'
+			</salesforce:salesforce-query>
+		</salesforce:query>
+		<logger level="INFO" doc:name="Logger"
+			doc:id="effb3ad5-d559-4deb-9f0e-2399ffc1a08a" message="#[output application/json --- payload]" />
+		<batch:job jobName="migrateObjectsBatch" doc:id="79b373e6-1aeb-43a9-9dfe-8ac0d2f31fdc">
+			<batch:process-records>
+				<batch:step name="getProspectFromWorkdayStep" doc:id="232087de-e311-49c1-a890-439c65ea1af2">
+					<ee:transform doc:name="Prepare Get Prospects Request"
+						doc:id="0e02f46c-ae8d-46ac-b5dc-57f0da276a19">
+						<ee:message>
+						</ee:message>
+						<ee:variables>
+							<ee:set-variable variableName="getProspectsRequest" ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 urn:com.workday/bsvc
+---
+{
+	ns0#Get_Prospects_Request: {
+		ns0#Request_Criteria: {
+			ns0#Prospect_ID: payload.Id
+		},
+		ns0#Response_Group: {
+			ns0#Include_Reference: true,
+			ns0#Include_Prospect_Data: true
+		}
+	}
+}]]></ee:set-variable>
+						</ee:variables>
+					</ee:transform>
+					<workday:invoke doc:name="Invoke" doc:id="6a07e811-023b-45d7-83dd-b3d7dc0804bb" config-ref="Workday_Config" service="Revenue_Management" operation="Get_Prospects" target="getProspectsResponse">
+						<workday:message >
+							<workday:body ><![CDATA[#[vars.getProspectsRequest]]]></workday:body>
+						</workday:message>
+					</workday:invoke>
+					<ee:transform doc:name="Push reference id to payload" doc:id="0e44967e-228c-48ab-a08d-cf1036662e9e" >
+						<ee:message >
+							<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+ns ns0 urn:com.workday/bsvc
+---
+
+payload ++ { 
+	wdayfReferenceId: vars.getProspectsResponse.body.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect[0].ns0#Prospect_Data.ns0#Prospect_ID										
+}]]></ee:set-payload>
+						</ee:message>
+					</ee:transform>
+            </batch:step>
+            <batch:step name="upsertProspectsInWorkdayStep" doc:id="78a74ab4-9b91-416d-985a-acda2ac377eb">
+					<ee:transform doc:name="Prepare Put Prospect Request" doc:id="80b25c68-5026-44e4-b3fe-af1b593cb905" >
+						<ee:message >
+							<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 urn:com.workday/bsvc
+
+fun countryLookup(salesforceCountry) =
+	if (salesforceCountry == 'USA') 'USA' 
+	else p('wdayf.country')
+
+fun stateLookup(salesforceState) = 
+	if (salesforceState == 'CA') { state:'USA-CA' } else { state: p("wdayf.state") }
+
+---
+{
+	ns0#Put_Prospect_Request: {
+		(ns0#Prospect_Reference: {
+			ns0#ID @(ns0#"type": "Prospect_Reference_ID"): payload.wdayfReferenceId
+		}) if payload.wdayfReferenceId != null,
+		ns0#Prospect_Data: {
+			ns0#Prospect_ID: payload.Id,
+			ns0#Prospect_Name: payload.Name,
+			ns0#Prospect_Source_Reference: {
+				ns0#ID @(ns0#"type": "External_Source_Code"): "SFDC"
+			},
+			ns0#Contact_Data: {
+				ns0#Address_Data: {
+					ns0#Country_Reference: {
+						ns0#ID @(ns0#"type": "ISO_3166-1_Alpha-3_Code"): countryLookup(payload.BillingCountry)
+					},
+					ns0#Address_Line_Data @(ns0#Type: "ADDRESS_LINE_1"): payload.BillingStreet default p('wdayf.street'),
+					ns0#Municipality: payload.BillingCity default p('wdayf.city'),
+					ns0#Country_Region_Reference: {
+						ns0#ID @(ns0#"type": "Country_Region_ID"): stateLookup(payload.BillingState).state default p('wdayf.state')
+					},
+					ns0#Postal_Code: payload.BillingPostalCode default p('wdayf.postalCode'),
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#"type": "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				},
+				ns0#Phone_Data: {
+					ns0#Phone_Number: payload.Phone default p('wdayf.phone'),
+					ns0#Phone_Device_Type_Reference: {
+						ns0#ID @(ns0#"type": "Phone_Device_Type_ID"): "1063.5"
+					},
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#"type": "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				},
+				(ns0#Web_Address_Data: {
+					ns0#Web_Address: if (payload.Website matches /http(s)?:\/\/.*/) payload.Website 
+            	            else "http://" ++ payload.Website,
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#"type": "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				}) if payload.Website != null
+			}
+		}
+	}
+}]]></ee:set-payload>
+						</ee:message>
+					</ee:transform>
+					<workday:invoke service="Revenue_Management" operation="Put_Prospect" doc:name="Invoke" doc:id="c7c928f5-567c-434f-9ea1-83c2ab298a47" config-ref="Workday_Config"/>
+            </batch:step>
+        </batch:process-records>
+        <batch:on-complete >
+            <scatter-gather doc:name="Scatter-Gather" doc:id="ef2964ef-0b85-4c6c-a5ee-b834df639e7b">
+                <route>
+                    <logger level="INFO" doc:name="Migration process has finished!" doc:id="b7575d38-7dbd-4602-9186-1bbb25234896" message="Migration process has finished!" />
+                </route>
+                <route>
+                    <ee:transform doc:name="Prepare migration result email"
+                                  doc:id="c84b4bc4-5a65-41c1-9d0c-f1ebd3d8db7a">
+                        <ee:message>
+                            <ee:set-payload><![CDATA[%dw 2.0
+ output text/plain
+ ---
+ "Migration Report: \n"
+
+ ++ "\n Time [milliseconds]: " 		++ payload.elapsedTimeInMillis
+ ++ "\n Total Records: "				++ payload.totalRecords
+ ++ "\n Successful Records: "		++ payload.successfulRecords
+ ++ "\n Failed Records: "			++ payload.failedRecords
+ ++ "\n Loaded Records: "			++ payload.loadedRecords
+ ++ "\n Processed Records: " 		++ payload.processedRecords]]></ee:set-payload>
+                        </ee:message>
+                    </ee:transform>
+                    <email:send config-ref="Gmail_SMTP" doc:name="Send migration result email"
+                                doc:id="5896eaa9-dd10-47a2-a6fc-6319b11dbd06" fromAddress="${mail.from}"
+                                subject="${mail.subject}">
+                        <email:to-addresses>
+                            <email:to-address value="${mail.to}" />
+                        </email:to-addresses>
+                    </email:send>
+                </route>
+            </scatter-gather>
+        </batch:on-complete>
+    </batch:job>
+</flow>
+<flow name="mainFlow" doc:id="7c0a5bef-b3d5-442f-bff3-10d038f69a5e" >
+    <flow-ref doc:name="businessLogicFlow" doc:id="91360ede-4d71-44c7-9b64-8ee762e04ea0" name="businessLogicFlow"/>
+    <error-handler >
+        <on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="488b507d-e26c-4c56-8759-8bb4f6645d71" type="ANY">
+            <flow-ref doc:name="errorHandlingFlow" doc:id="afdaf73c-0137-4d60-84f6-5c41234771a3" name="errorHandlingFlow" />
+        </on-error-propagate>
+    </error-handler>
+</flow>
+</mule>
+
+
+        

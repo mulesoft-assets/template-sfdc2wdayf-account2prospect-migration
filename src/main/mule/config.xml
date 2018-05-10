@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:workday="http://www.mulesoft.org/schema/mule/workday"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd">
+
+	<http:listener-config name="HTTP_Listener_config"
+		doc:name="HTTP Listener config" doc:id="910654bf-9fd9-4073-bad4-cf951b7f0022">
+		<http:listener-connection host="0.0.0.0"
+			port="${http.port}" />
+	</http:listener-config>
+
+	<email:smtp-config name="Gmail_SMTP" doc:name="Email SMTP"
+		doc:id="8ba14ccd-a5b8-43a8-8281-cd433c852f2b">
+		<email:smtps-connection host="${smtp.host}"
+			port="${smtp.port}" user="${smtp.user}" password="${smtp.password}"
+			tlsContext="TLS_Context" />
+	</email:smtp-config>
+	<tls:context name="TLS_Context" doc:name="TLS Context"
+		doc:id="233e532c-8296-4ddd-ac67-e2b7984b3609">
+		<tls:trust-store insecure="true" />
+	</tls:context>
+	<configuration-properties file="mule-artifact.properties"
+		doc:name="Configuration properties" doc:id="46877740-aac5-4812-8728-4718689aa9ec" />
+	<configuration-properties file="common.properties"
+		doc:name="Configuration properties" doc:id="dffa4da7-cc5c-4ecb-922e-1115b4387354" />
+	<configuration-properties file="mule.${mule.env}.properties"
+		doc:name="Configuration properties" doc:id="674beef8-9485-40a7-99b9-0685c9b7e863" />
+	<salesforce:sfdc-config name="Salesforce_Config"
+		doc:name="Salesforce Config" doc:id="12783a85-a403-4e74-834e-da971ecb68aa">
+		<salesforce:basic-connection username="${sfdc.username}"
+			password="${sfdc.password}" securityToken="${sfdc.securityToken}" />
+	</salesforce:sfdc-config>
+	<workday:config name="Workday_Config" doc:name="Workday Config"
+		doc:id="f097b282-2b5b-4244-ba67-78e7435cf7a9">
+		<workday:basic-connection username="${wday.username}"
+			password="${wday.password}" tenantName="${wday.tenant}" hostName="${wday.host}">
+			<workday:transport>
+				<workday:default-http-dispatcher-provider />
+			</workday:transport>
+		</workday:basic-connection>
+	</workday:config>
+</mule>
+
+
+        
