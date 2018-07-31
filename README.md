@@ -131,7 +131,6 @@ Mule Studio offers several ways to import a project into the workspace, for inst
 + Anypoint Studio Project from File System
 + Packaged mule application (.jar)
 
-
 You can find a detailed description on how to do so in this [Documentation Page](http://www.mulesoft.org/documentation/display/current/Importing+and+Exporting+in+Studio).
 
 
@@ -142,7 +141,9 @@ Once you have imported you Anypoint Template into Anypoint Studio you need to fo
 + Complete all the properties required as per the examples in the section [Properties to be configured](#propertiestobeconfigured)
 + Once that is done, right click on you Anypoint Template project folder 
 + Hover you mouse over `"Run as"`
-+ Click on  `"Mule Application"`
++ Click on  `"Mule Application (configure)"`
++ Inside the dialog, select Environment and set the variable `"mule.env"` to the value `"dev"`
++ Click `"Run"`
 
 
 ### Running on Mule ESB stand alone <a name="runonmuleesbstandalone"/>
