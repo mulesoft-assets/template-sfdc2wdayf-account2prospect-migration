@@ -131,7 +131,7 @@ fun stateLookup(salesforceState) =
 }]]></ee:set-payload>
 						</ee:message>
 					</ee:transform>
-					<workday:revenue-management operation="Put_Prospect" doc:name="Revenue management" doc:id="0ccc2b07-169b-481e-a876-004de1abfa19" config-ref="Workday_Config_version_30"/>
+					<workday:revenue-management operation="Put_Prospect" doc:name="Upsert prospect" doc:id="0ccc2b07-169b-481e-a876-004de1abfa19" config-ref="Workday_Config_version_30"/>
             </batch:step>
         </batch:process-records>
         <batch:on-complete >
