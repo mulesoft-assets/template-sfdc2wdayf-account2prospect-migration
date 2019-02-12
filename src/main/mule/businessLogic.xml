@@ -15,16 +15,6 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd">
 
 	<flow name="businessLogicFlow" doc:id="884f86c5-66e1-4701-bb9b-594c2a60abf3">
-		<salesforce:query doc:name="Select Accounts from SFDC"
-			doc:id="5de63d1d-1f78-4eec-8ed6-dd7cb05280da" config-ref="Salesforce_Config">
-			<salesforce:salesforce-query>SELECT
-				BillingStreet,BillingCity,BillingPostalCode,BillingState,BillingCountry,Description,Id,Industry,Name,Phone,Type,Website
-				FROM Account
-				WHERE Type = 'Prospect'
-			</salesforce:salesforce-query>
-		</salesforce:query>
-		<logger level="INFO" doc:name="Logger"
-			doc:id="effb3ad5-d559-4deb-9f0e-2399ffc1a08a" message="#[output application/json --- payload]" />
 		<batch:job jobName="migrateObjectsBatch" doc:id="79b373e6-1aeb-43a9-9dfe-8ac0d2f31fdc">
 			<batch:process-records>
 				<batch:step name="getProspectFromWorkdayStep" doc:id="232087de-e311-49c1-a890-439c65ea1af2">
@@ -50,11 +40,9 @@ ns ns0 urn:com.workday/bsvc
 }]]></ee:set-variable>
 						</ee:variables>
 					</ee:transform>
-					<workday:invoke doc:name="Invoke" doc:id="6a07e811-023b-45d7-83dd-b3d7dc0804bb" config-ref="Workday_Config" service="Revenue_Management" operation="Get_Prospects" target="getProspectsResponse">
-						<workday:message >
-							<workday:body ><![CDATA[#[vars.getProspectsRequest]]]></workday:body>
-						</workday:message>
-					</workday:invoke>
+					<workday:revenue-management operation="Get_Prospects" doc:name="Get prospects from Workday" doc:id="45608b03-ad29-4802-99b9-d63258515eee" config-ref="Workday_Config_version_30" target="getProspectsResponse">
+						<workday:content ><![CDATA[#[vars.getProspectsRequest]]]></workday:content>
+					</workday:revenue-management>
 					<ee:transform doc:name="Push reference id to payload" doc:id="0e44967e-228c-48ab-a08d-cf1036662e9e" >
 						<ee:message >
 							<ee:set-payload ><![CDATA[%dw 2.0
@@ -63,7 +51,7 @@ ns ns0 urn:com.workday/bsvc
 ---
 
 payload ++ { 
-	wdayfReferenceId: vars.getProspectsResponse.body.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect[0].ns0#Prospect_Data.ns0#Prospect_ID										
+	wdayfReferenceId: vars.getProspectsResponse.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Prospect_ID										
 }]]></ee:set-payload>
 						</ee:message>
 					</ee:transform>
@@ -143,7 +131,7 @@ fun stateLookup(salesforceState) =
 }]]></ee:set-payload>
 						</ee:message>
 					</ee:transform>
-					<workday:invoke service="Revenue_Management" operation="Put_Prospect" doc:name="Invoke" doc:id="c7c928f5-567c-434f-9ea1-83c2ab298a47" config-ref="Workday_Config"/>
+					<workday:revenue-management operation="Put_Prospect" doc:name="Upsert prospect" doc:id="0ccc2b07-169b-481e-a876-004de1abfa19" config-ref="Workday_Config_version_30"/>
             </batch:step>
         </batch:process-records>
         <batch:on-complete >
@@ -180,9 +168,19 @@ fun stateLookup(salesforceState) =
         </batch:on-complete>
     </batch:job>
 </flow>
-<flow name="mainFlow" doc:id="7c0a5bef-b3d5-442f-bff3-10d038f69a5e" >
-    <flow-ref doc:name="businessLogicFlow" doc:id="91360ede-4d71-44c7-9b64-8ee762e04ea0" name="businessLogicFlow"/>
-    <error-handler >
+<flow name="queryFlow" doc:id="f7fd127b-9de5-4736-8531-af89f7eea08e" >
+		<salesforce:query doc:name="Select Accounts from SFDC" doc:id="5de63d1d-1f78-4eec-8ed6-dd7cb05280da" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query>SELECT
+				BillingStreet,BillingCity,BillingPostalCode,BillingState,BillingCountry,Description,Id,Industry,Name,Phone,Type,Website
+				FROM Account
+				WHERE Type = 'Prospect'
+			</salesforce:salesforce-query>
+		</salesforce:query>
+	</flow>
+	<flow name="mainFlow" doc:id="7c0a5bef-b3d5-442f-bff3-10d038f69a5e" >
+    <flow-ref doc:name="queryFlow" doc:id="888f8f57-6f30-47ff-8975-78d3ca5d738a" name="queryFlow"/>
+		<flow-ref doc:name="businessLogicFlow" doc:id="91360ede-4d71-44c7-9b64-8ee762e04ea0" name="businessLogicFlow"/>
+		<error-handler >
         <on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="488b507d-e26c-4c56-8759-8bb4f6645d71" type="ANY">
             <flow-ref doc:name="errorHandlingFlow" doc:id="afdaf73c-0137-4d60-84f6-5c41234771a3" name="errorHandlingFlow" />
         </on-error-propagate>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:workday="http://www.mulesoft.org/schema/mule/workday"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<munit:config name="test-suite.xml" />
+	<configuration-properties doc:name="Configuration properties"
+		doc:id="73eb7f68-ae5b-4537-827c-d69d8f3043c9" file="mule.test.properties" />
+
+	<munit:before-test name="test-suiteBefore_Test"
+		description="Before tests actions" doc:id="e2d9ab55-3e70-474c-8e29-bb0ce5748d7f">
+		<flow-ref doc:name="getTestProspectFlow" doc:id="dd4054a3-0d82-4266-9755-4d4dabc6797b"
+			name="getTestProspectFlow" />
+		<ee:transform
+			doc:name="Save workday data to wdayProspect variable and prepare test data"
+			doc:id="41fa4eb3-a1eb-4414-bb24-8a30f30c1220">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable variableName="wdayProspect"><![CDATA[%dw 2.0
+output application/java
+ns ns0 urn:com.workday/bsvc
+---
+{
+	Name: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Prospect_Name,
+	ID: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Prospect_ID,
+	BillingStreet: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Address_Data.ns0#Address_Line_Data,
+	BillingCity: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Address_Data.ns0#Municipality,
+	Phone: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Phone_Data.ns0#Phone_Number,
+	PostalCode: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Address_Data.ns0#Postal_Code
+}]]></ee:set-variable>
+				<ee:set-variable variableName="testAccountData"><![CDATA[%dw 2.0
+output application/java
+var uniqueNumber = randomInt(10000)
+---
+{
+	Name: "testAccount" ++ uniqueNumber,
+	BillingStreet: "testStreet" ++ uniqueNumber,
+	BillingCity: "testCity" ++ uniqueNumber,
+	Phone: "+421944" ++ uniqueNumber,
+	"Type": "Prospect"
+}]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<salesforce:create type="Account"
+			doc:name="Create Accounts in salesforce" doc:id="5a4c8ae0-cd0a-4c8c-9ea4-b35537ac445f"
+			config-ref="Salesforce_Config">
+			<salesforce:records><![CDATA[#[[vars.testAccountData]]]]></salesforce:records>
+		</salesforce:create>
+		<set-variable value="#[payload[0].id]" doc:name="Store ID to variable sfdcID"
+			doc:id="2e6186c6-6ad0-434b-bb68-fa8a943ba926" variableName="sfdcID" />
+		<munit-tools:mock-when doc:name="Mock email processor to avoid sending email"
+			doc:id="821230de-8284-44f5-86fd-8418ed6eb116" processor="email:send">
+			<munit-tools:then-return />
+		</munit-tools:mock-when>
+	</munit:before-test>
+
+
+	<munit:test name="test-suiteTest" description="MUnit Test"
+		doc:id="d9b99079-7d37-49e0-ab3e-0da59aa105db">
+		<munit:execution>
+			<flow-ref doc:name="queryFlow" doc:id="1fceb54d-2470-4678-8209-b2f04d106d46"
+				name="queryFlow" />
+			<ee:transform doc:name="Filter testing data"
+				doc:id="0fb04161-8c82-4011-85ef-be8fd468b2ef">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+
+---
+payload filter ($.Name == vars.testAccountData.Name) map {
+	Id: vars.wdayProspect.ID,
+	Name: $.Name,
+	BillingStreet: $.BillingStreet,
+	BillingCity: $.BillingCity,
+	Phone: $.Phone,
+	Type: $.Type
+} ]]></ee:set-payload>
+				</ee:message>
+				<ee:variables>
+					<ee:set-variable variableName="testCaseWday"><![CDATA[%dw 2.0
+output application/java
+---
+payload[0]]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<flow-ref doc:name="Flow-ref to businessLogicFlow" doc:id="20701d84-a725-441d-98de-fa4dc2c417e3" 
+				name="businessLogicFlow"/>
+			<scripting:execute doc:name="Sleep for 30s until the processing is completed"
+				doc:id="67f2f630-8d93-49d6-aa92-388d32897812" engine="groovy">
+				<scripting:code>sleep(30000)</scripting:code>
+			</scripting:execute>
+			<flow-ref doc:name="getTestProspectFlow" doc:id="2a547fdb-0292-4bcb-ba05-18ee66c9cc3b" name="getTestProspectFlow"/>
+			<ee:transform doc:name="Save migrationData" doc:id="fc2861d5-5716-40e8-a0dd-4715498793b2" >
+				<ee:message >
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="migratedData" ><![CDATA[%dw 2.0
+output application/java
+ns ns0 urn:com.workday/bsvc
+---
+{	
+	Name: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Prospect_Name,
+	BillingStreet: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Address_Data.ns0#Address_Line_Data,
+	BillingCity: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Address_Data.ns0#Municipality,
+	Phone: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Phone_Data.ns0#Phone_Number,
+	Website: payload.ns0#Get_Prospects_Response.ns0#Response_Data.ns0#Prospect.ns0#Prospect_Data.ns0#Contact_Data.ns0#Web_Address_Data.ns0#Web_Address		
+}]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			
+
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Check migrated Name"
+				doc:id="ebe0d750-7ae2-4dd2-ae48-c6670b79976a" expression="#[vars.testAccountData.Name]"
+				is="#[MunitTools::equalTo(vars.migratedData.Name)]" message="Check migration Name"/>
+			<munit-tools:assert-that doc:name="Check migrated BillingCity"
+				doc:id="2c08fd0d-2331-4633-8f45-df7adf7ac716" expression="#[vars.testAccountData.BillingCity]"
+				is="#[MunitTools::equalTo(vars.migratedData.BillingCity)]" message="Check migration BillingCity"/>
+			<munit-tools:assert-that doc:name="Check migrated Phone"
+				doc:id="337f9bee-4ba6-4628-86a2-4cd472d768bb" expression="#[vars.testAccountData.Phone]"
+				is="#[MunitTools::equalTo(vars.migratedData.Phone)]" message="Check migration Phone"/>
+			<munit-tools:assert-that doc:name="Check migrated BillingStreet"
+				doc:id="73278fe6-5d2c-4dfa-bb30-c399fb8c10c6" expression="#[vars.testAccountData.BillingStreet]"
+				is="#[MunitTools::equalTo(vars.migratedData.BillingStreet)]" message="Check migration BillingStreet"/>
+			
+		</munit:validation>
+	</munit:test>
+	<sub-flow name="getTestProspectFlow" doc:id="eea205d3-6f1d-46e0-a25b-ce839fbac131">
+		<ee:transform doc:name="Prepare request for test prospect" doc:id="8fdcc22d-8071-4196-82df-c5ceedbcebcc">
+			<ee:message>
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 urn:com.workday/bsvc
+---
+{
+	ns0#Get_Prospects_Request: {
+		ns0#Request_Criteria: {
+			ns0#Prospect_ID: p('wday.test.prospectID')
+		},
+		ns0#Response_Group: {
+			ns0#Include_Reference: true,
+			ns0#Include_Prospect_Data: true
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+			<ee:variables>
+			</ee:variables>
+		</ee:transform>
+		<workday:revenue-management operation="Get_Prospects" doc:name="Get test prospect from Workday" doc:id="a2e72e1a-0c43-48be-88ce-fef4ac2d1acf" config-ref="Workday_Config_version_30">
+		</workday:revenue-management>
+	</sub-flow>
+<munit:after-test name="test-suiteAfter_Test" description="After tests actions" doc:id="ed1ab872-a868-4fa1-8746-aaf582d626fe">
+		<ee:transform doc:name="Request for update wday test data" doc:id="1b0ff00c-4e58-4eb0-ae06-713036b54354">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/xml
+ns ns0 urn:com.workday/bsvc
+---
+{
+	ns0#Put_Prospect_Request: {
+		ns0#Prospect_Reference: {
+			ns0#ID @(ns0#"type": "Prospect_Reference_ID"): vars.wdayProspect.ID,
+		},
+		ns0#Prospect_Data: {
+			ns0#Prospect_ID: vars.wdayProspect.ID,
+			ns0#Prospect_Name: vars.wdayProspect.Name,
+			ns0#Prospect_Source_Reference: {
+				ns0#ID @(ns0#"type": "External_Source_Code"): "SFDC"
+			},
+			ns0#Contact_Data: {
+				ns0#Address_Data: {
+					ns0#Country_Reference: {
+						ns0#ID @(ns0#"type": "ISO_3166-1_Alpha-3_Code"): 'USA' 
+					},
+					ns0#Address_Line_Data @(ns0#Type: "ADDRESS_LINE_1"): vars.wdayProspect.BillingStreet,
+					ns0#Municipality: vars.wdayProspect.BillingCity,
+					ns0#Country_Region_Reference: {
+						ns0#ID @(ns0#"type": "Country_Region_ID"): 'USA-CA'
+					},
+					ns0#Postal_Code: vars.wdayProspect.PostalCode,
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#"type": "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				},
+				ns0#Phone_Data: {
+					ns0#Phone_Number: vars.wdayProspect.Phone,
+					ns0#Phone_Device_Type_Reference: {
+						ns0#ID @(ns0#"type": "Phone_Device_Type_ID"): "1063.5"
+					},
+					ns0#Usage_Data: {
+						ns0#Type_Data @(ns0#Primary: true): {
+							ns0#Type_Reference: {
+								ns0#ID @(ns0#"type": "Communication_Usage_Type_ID"): "HOME"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<workday:revenue-management operation="Put_Prospect" doc:name="Set previous data to workday" doc:id="bc3b7134-0c3a-4adf-9419-0d4e8fcb28f1" config-ref="Workday_Config_version_30"/>
+		<salesforce:delete doc:name="Delete source Account in Salesforce"
+			doc:id="b98b6ee6-7342-4345-8e4f-53780960a680" config-ref="Salesforce_Config">
+			<salesforce:delete-ids><![CDATA[#[[vars.sfdcID]]]]></salesforce:delete-ids>
+		</salesforce:delete>
+		
+		
+	</munit:after-test>
+
+
+</mule>
