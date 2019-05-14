@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:workday="http://www.mulesoft.org/schema/mule/workday" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd">
-	
+
 	<global-property doc:name="Global Property" name="mule.env" value="dev" />
 	<http:listener-config name="HTTP_Listener_config" doc:id="910654bf-9fd9-4073-bad4-cf951b7f0022" doc:name="HTTP Listener config">
 		<http:listener-connection host="0.0.0.0" port="${http.port}" />
@@ -16,10 +16,10 @@
 	<configuration-properties file="mule.${mule.env}.properties" doc:id="674beef8-9485-40a7-99b9-0685c9b7e863" doc:name="Configuration properties" />
 	<salesforce:sfdc-config name="Salesforce_Config" doc:id="12783a85-a403-4e74-834e-da971ecb68aa" doc:name="Salesforce Config">
 		<salesforce:basic-connection password="${sfdc.password}" securityToken="${sfdc.securityToken}" username="${sfdc.username}" />
-	</salesforce:sfdc-config>	
+	</salesforce:sfdc-config>
 	<workday:config-version-30-config name="Workday_Config_version_30" doc:name="Workday Config version 30" doc:id="73b1f728-69d4-403b-8039-e6be5fa4b356" >
-		<workday:basic-authentication-api-v30-connection username="${wday.username}" password="${wday.password}" tenantName="${wday.tenant}" hostName="${wday.host}" responseTimeout="25000"/>
+		<workday:basic-authentication-api-v30-connection username="${wday.username}" password="${wday.password}" tenantName="${wday.tenant}" hostName="${wday.host}" responseTimeout="${wday.responseTimeout}"/>
 	</workday:config-version-30-config>
-	
-	
+
+
 	</mule>
