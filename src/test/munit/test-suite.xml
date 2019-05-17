@@ -22,7 +22,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 	<munit:before-test name="test-suiteBefore_Test"
 		description="Before tests actions" doc:id="e2d9ab55-3e70-474c-8e29-bb0ce5748d7f">
 		<flow-ref doc:name="getTestProspectFlow" doc:id="dd4054a3-0d82-4266-9755-4d4dabc6797b"
-			name="getTestProspectFlow" />
+			name="getTestProspectSubFlow" />
 		<ee:transform
 			doc:name="Save workday data to wdayProspect variable and prepare test data"
 			doc:id="41fa4eb3-a1eb-4414-bb24-8a30f30c1220">
@@ -102,7 +102,7 @@ payload[0]]]></ee:set-variable>
 				doc:id="67f2f630-8d93-49d6-aa92-388d32897812" engine="groovy">
 				<scripting:code>sleep(30000)</scripting:code>
 			</scripting:execute>
-			<flow-ref doc:name="getTestProspectFlow" doc:id="2a547fdb-0292-4bcb-ba05-18ee66c9cc3b" name="getTestProspectFlow"/>
+			<flow-ref doc:name="getTestProspectFlow" doc:id="2a547fdb-0292-4bcb-ba05-18ee66c9cc3b" name="getTestProspectSubFlow"/>
 			<ee:transform doc:name="Save migrationData" doc:id="fc2861d5-5716-40e8-a0dd-4715498793b2" >
 				<ee:message >
 				</ee:message>
@@ -120,52 +120,7 @@ ns ns0 urn:com.workday/bsvc
 }]]></ee:set-variable>
 				</ee:variables>
 			</ee:transform>
-			
-
-		</munit:execution>
-		<munit:validation>
-			<munit-tools:assert-that doc:name="Check migrated Name"
-				doc:id="ebe0d750-7ae2-4dd2-ae48-c6670b79976a" expression="#[vars.testAccountData.Name]"
-				is="#[MunitTools::equalTo(vars.migratedData.Name)]" message="Check migration Name"/>
-			<munit-tools:assert-that doc:name="Check migrated BillingCity"
-				doc:id="2c08fd0d-2331-4633-8f45-df7adf7ac716" expression="#[vars.testAccountData.BillingCity]"
-				is="#[MunitTools::equalTo(vars.migratedData.BillingCity)]" message="Check migration BillingCity"/>
-			<munit-tools:assert-that doc:name="Check migrated Phone"
-				doc:id="337f9bee-4ba6-4628-86a2-4cd472d768bb" expression="#[vars.testAccountData.Phone]"
-				is="#[MunitTools::equalTo(vars.migratedData.Phone)]" message="Check migration Phone"/>
-			<munit-tools:assert-that doc:name="Check migrated BillingStreet"
-				doc:id="73278fe6-5d2c-4dfa-bb30-c399fb8c10c6" expression="#[vars.testAccountData.BillingStreet]"
-				is="#[MunitTools::equalTo(vars.migratedData.BillingStreet)]" message="Check migration BillingStreet"/>
-			
-		</munit:validation>
-	</munit:test>
-	<sub-flow name="getTestProspectFlow" doc:id="eea205d3-6f1d-46e0-a25b-ce839fbac131">
-		<ee:transform doc:name="Prepare request for test prospect" doc:id="8fdcc22d-8071-4196-82df-c5ceedbcebcc">
-			<ee:message>
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/xml
-ns ns0 urn:com.workday/bsvc
----
-{
-	ns0#Get_Prospects_Request: {
-		ns0#Request_Criteria: {
-			ns0#Prospect_ID: p('wday.test.prospectID')
-		},
-		ns0#Response_Group: {
-			ns0#Include_Reference: true,
-			ns0#Include_Prospect_Data: true
-		}
-	}
-}]]></ee:set-payload>
-			</ee:message>
-			<ee:variables>
-			</ee:variables>
-		</ee:transform>
-		<workday:revenue-management operation="Get_Prospects" doc:name="Get test prospect from Workday" doc:id="a2e72e1a-0c43-48be-88ce-fef4ac2d1acf" config-ref="Workday_Config_version_30">
-		</workday:revenue-management>
-	</sub-flow>
-<munit:after-test name="test-suiteAfter_Test" description="After tests actions" doc:id="ed1ab872-a868-4fa1-8746-aaf582d626fe">
-		<ee:transform doc:name="Request for update wday test data" doc:id="1b0ff00c-4e58-4eb0-ae06-713036b54354">
+			<ee:transform doc:name="Request for update wday test data" doc:id="1b0ff00c-4e58-4eb0-ae06-713036b54354">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0
 output application/xml
@@ -220,7 +175,52 @@ ns ns0 urn:com.workday/bsvc
 	}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<workday:revenue-management operation="Put_Prospect" doc:name="Set previous data to workday" doc:id="bc3b7134-0c3a-4adf-9419-0d4e8fcb28f1" config-ref="Workday_Config_version_30"/>
+			<workday:revenue-management operation="Put_Prospect" doc:name="Set previous data to workday" doc:id="bc3b7134-0c3a-4adf-9419-0d4e8fcb28f1" config-ref="Workday_Config_version_30" />
+			
+
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Check migrated Name"
+				doc:id="ebe0d750-7ae2-4dd2-ae48-c6670b79976a" expression="#[vars.testAccountData.Name]"
+				is="#[MunitTools::equalTo(vars.migratedData.Name)]" message="Check migration Name"/>
+			<munit-tools:assert-that doc:name="Check migrated BillingCity"
+				doc:id="2c08fd0d-2331-4633-8f45-df7adf7ac716" expression="#[vars.testAccountData.BillingCity]"
+				is="#[MunitTools::equalTo(vars.migratedData.BillingCity)]" message="Check migration BillingCity"/>
+			<munit-tools:assert-that doc:name="Check migrated Phone"
+				doc:id="337f9bee-4ba6-4628-86a2-4cd472d768bb" expression="#[vars.testAccountData.Phone]"
+				is="#[MunitTools::equalTo(vars.migratedData.Phone)]" message="Check migration Phone"/>
+			<munit-tools:assert-that doc:name="Check migrated BillingStreet"
+				doc:id="73278fe6-5d2c-4dfa-bb30-c399fb8c10c6" expression="#[vars.testAccountData.BillingStreet]"
+				is="#[MunitTools::equalTo(vars.migratedData.BillingStreet)]" message="Check migration BillingStreet"/>
+			
+		</munit:validation>
+	</munit:test>
+	<sub-flow name="getTestProspectSubFlow" doc:id="eea205d3-6f1d-46e0-a25b-ce839fbac131">
+		<ee:transform doc:name="Prepare request for test prospect" doc:id="8fdcc22d-8071-4196-82df-c5ceedbcebcc">
+			<ee:message>
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 urn:com.workday/bsvc
+---
+{
+	ns0#Get_Prospects_Request: {
+		ns0#Request_Criteria: {
+			ns0#Prospect_ID: p('wday.test.prospectID')
+		},
+		ns0#Response_Group: {
+			ns0#Include_Reference: true,
+			ns0#Include_Prospect_Data: true
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+			<ee:variables>
+			</ee:variables>
+		</ee:transform>
+		<workday:revenue-management operation="Get_Prospects" doc:name="Get test prospect from Workday" doc:id="a2e72e1a-0c43-48be-88ce-fef4ac2d1acf" config-ref="Workday_Config_version_30">
+		</workday:revenue-management>
+	</sub-flow>
+<munit:after-test name="test-suiteAfter_Test" description="After tests actions" doc:id="ed1ab872-a868-4fa1-8746-aaf582d626fe">
 		<salesforce:delete doc:name="Delete source Account in Salesforce"
 			doc:id="b98b6ee6-7342-4345-8e4f-53780960a680" config-ref="Salesforce_Config">
 			<salesforce:delete-ids><![CDATA[#[[vars.sfdcID]]]]></salesforce:delete-ids>
