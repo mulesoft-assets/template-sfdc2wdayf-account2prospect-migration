@@ -103,6 +103,7 @@ fun stateLookup(salesforceState) =
 				},
 				ns0#Phone_Data: {
 					ns0#Phone_Number: payload.Phone default p('wdayf.phone'),
+					ns0#Country_ISO_Code : countryLookup(payload.BillingCountry),
 					ns0#Phone_Device_Type_Reference: {
 						ns0#ID @(ns0#"type": "Phone_Device_Type_ID"): "1063.5"
 					},
