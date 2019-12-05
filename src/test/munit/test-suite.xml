@@ -158,6 +158,7 @@ ns ns0 urn:com.workday/bsvc
 				},
 				ns0#Phone_Data: {
 					ns0#Phone_Number: vars.wdayProspect.Phone,
+					ns0#Country_ISO_Code : 'USA',
 					ns0#Phone_Device_Type_Reference: {
 						ns0#ID @(ns0#"type": "Phone_Device_Type_ID"): "1063.5"
 					},
