@@ -40,7 +40,7 @@ ns ns0 urn:com.workday/bsvc
 }]]></ee:set-variable>
 						</ee:variables>
 					</ee:transform>
-					<workday:revenue-management operation="Get_Prospects" doc:name="Get prospects from Workday" doc:id="45608b03-ad29-4802-99b9-d63258515eee" config-ref="Workday_Config_version_30" target="getProspectsResponse">
+					<workday:revenue-management operation="Get_Prospects" doc:name="Get prospects from Workday" doc:id="45608b03-ad29-4802-99b9-d63258515eee" config-ref="Workday_Config" target="getProspectsResponse">
 						<workday:content ><![CDATA[#[vars.getProspectsRequest]]]></workday:content>
 					</workday:revenue-management>
 					<ee:transform doc:name="Push reference id to payload" doc:id="0e44967e-228c-48ab-a08d-cf1036662e9e" >
@@ -103,6 +103,7 @@ fun stateLookup(salesforceState) =
 				},
 				ns0#Phone_Data: {
 					ns0#Phone_Number: payload.Phone default p('wdayf.phone'),
+					ns0#Country_ISO_Code : countryLookup(payload.BillingCountry),
 					ns0#Phone_Device_Type_Reference: {
 						ns0#ID @(ns0#"type": "Phone_Device_Type_ID"): "1063.5"
 					},
@@ -131,7 +132,7 @@ fun stateLookup(salesforceState) =
 }]]></ee:set-payload>
 						</ee:message>
 					</ee:transform>
-					<workday:revenue-management operation="Put_Prospect" doc:name="Upsert prospect" doc:id="0ccc2b07-169b-481e-a876-004de1abfa19" config-ref="Workday_Config_version_30"/>
+					<workday:revenue-management operation="Put_Prospect" doc:name="Upsert prospect" doc:id="0ccc2b07-169b-481e-a876-004de1abfa19" config-ref="Workday_Config"/>
             </batch:step>
         </batch:process-records>
         <batch:on-complete >

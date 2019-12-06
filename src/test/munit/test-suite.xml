@@ -49,7 +49,7 @@ var uniqueNumber = randomInt(10000)
 	Name: "testAccount" ++ uniqueNumber,
 	BillingStreet: "testStreet" ++ uniqueNumber,
 	BillingCity: "testCity" ++ uniqueNumber,
-	Phone: "+421944" ++ uniqueNumber,
+	Phone: "415944" ++ uniqueNumber,
 	"Type": "Prospect"
 }]]></ee:set-variable>
 			</ee:variables>
@@ -158,6 +158,7 @@ ns ns0 urn:com.workday/bsvc
 				},
 				ns0#Phone_Data: {
 					ns0#Phone_Number: vars.wdayProspect.Phone,
+					ns0#Country_ISO_Code : 'USA',
 					ns0#Phone_Device_Type_Reference: {
 						ns0#ID @(ns0#"type": "Phone_Device_Type_ID"): "1063.5"
 					},
@@ -175,7 +176,7 @@ ns ns0 urn:com.workday/bsvc
 	}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-			<workday:revenue-management operation="Put_Prospect" doc:name="Set previous data to workday" doc:id="bc3b7134-0c3a-4adf-9419-0d4e8fcb28f1" config-ref="Workday_Config_version_30" />
+			<workday:revenue-management operation="Put_Prospect" doc:name="Set previous data to workday" doc:id="bc3b7134-0c3a-4adf-9419-0d4e8fcb28f1" config-ref="Workday_Config" />
 			
 
 		</munit:execution>
@@ -217,7 +218,7 @@ ns ns0 urn:com.workday/bsvc
 			<ee:variables>
 			</ee:variables>
 		</ee:transform>
-		<workday:revenue-management operation="Get_Prospects" doc:name="Get test prospect from Workday" doc:id="a2e72e1a-0c43-48be-88ce-fef4ac2d1acf" config-ref="Workday_Config_version_30">
+		<workday:revenue-management operation="Get_Prospects" doc:name="Get test prospect from Workday" doc:id="a2e72e1a-0c43-48be-88ce-fef4ac2d1acf" config-ref="Workday_Config">
 		</workday:revenue-management>
 	</sub-flow>
 <munit:after-test name="test-suiteAfter_Test" description="After tests actions" doc:id="ed1ab872-a868-4fa1-8746-aaf582d626fe">
