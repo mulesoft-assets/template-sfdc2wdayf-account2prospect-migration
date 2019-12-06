@@ -49,7 +49,7 @@ var uniqueNumber = randomInt(10000)
 	Name: "testAccount" ++ uniqueNumber,
 	BillingStreet: "testStreet" ++ uniqueNumber,
 	BillingCity: "testCity" ++ uniqueNumber,
-	Phone: "+421944" ++ uniqueNumber,
+	Phone: "415944" ++ uniqueNumber,
 	"Type": "Prospect"
 }]]></ee:set-variable>
 			</ee:variables>
